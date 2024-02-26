@@ -1139,10 +1139,10 @@ I have started to develop qecore only a few years back, so this project is relat
 
 ## Examples
 
-  - <a href="https://github.com/modehnal/modehnal.github.io/data/gnome_terminal_test_example.webm">Video prepared, side by side of session with command line</a>
-  - <a href="https://github.com/modehnal/modehnal.github.io/data/backtrace_from_coredump_zenity_example.html">Backtrace from coredump Example</a>
-  - <a href="https://github.com/modehnal/modehnal.github.io/data/full_report_example.html">Full HTML Report Example</a>
-  - <a href="https://github.com/modehnal/modehnal.github.io/data/headless_colour_troubleshooting.png">The qecore-headless troubleshooting</a>
+  - <a href="https://modehnal.github.io/data/gnome_terminal_test_example.webm">Video prepared, side by side of session with command line</a>
+  - <a href="https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html">Backtrace from coredump Example</a>
+  - <a href="https://modehnal.github.io/data/full_report_example.html">Full HTML Report Example</a>
+  - <a href="https://modehnal.github.io/data/headless_colour_troubleshooting.png">The qecore-headless troubleshooting</a>
 
 
 ## Comparison of OpenQA vs Accessibility
