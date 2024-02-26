@@ -683,8 +683,7 @@ I have started to develop qecore only a few years back, so this project is relat
 
     ```
     git clone https://github.com/modehnal/GNOMETerminalAutomation.git
-    cd GNOMETerminalAutomation/gnome-terminal
-    git checkout fedora-38
+    cd GNOMETerminalAutomation
     ```
 
     Now that we are in the project directory. Let's start the first test to make sure everything is running smoothly. Start the `qecore-headless` as a user `test`:
@@ -1140,10 +1139,10 @@ I have started to develop qecore only a few years back, so this project is relat
 
 ## Examples
 
-  - <a href="https://modehnal.github.io/GNOMETerminalAutomation/data/gnome_terminal_test_example.webm">Video prepared, side by side of session with command line</a>
-  - <a href="https://modehnal.github.io/GNOMETerminalAutomation/data/backtrace_from_coredump_zenity_example.html">Backtrace from coredump Example</a>
-  - <a href="https://modehnal.github.io/GNOMETerminalAutomation/data/full_report_example.html">Full HTML Report Example</a>
-  - <a href="https://modehnal.github.io/GNOMETerminalAutomation/data/headless_colour_troubleshooting.png">The qecore-headless troubleshooting</a>
+  - <a href="https://modehnal.github.io/data/gnome_terminal_test_example.webm">Video prepared, side by side of session with command line</a>
+  - <a href="https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html">Backtrace from coredump Example</a>
+  - <a href="https://modehnal.github.io/data/full_report_example.html">Full HTML Report Example</a>
+  - <a href="https://modehnal.github.io/data/headless_colour_troubleshooting.png">The qecore-headless troubleshooting</a>
 
 
 ## Comparison of OpenQA vs Accessibility
