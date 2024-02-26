@@ -1153,7 +1153,7 @@ I have started to develop qecore only a few years back, so this project is relat
 
   On the other hand with Atspi, if we see a failed test, most of the time it is a bug or the UI label or placement has changed. On bugs the issue is clear and there is nothing to be changed on the automation side. With UI change we check Screenshot or Video to see what happened, and usually we can fix the test very quickly by changing order of clicks or rewriting a string. Once the suite is written, it can be easily expanded with new test cases and maintained through different version releases. There are some issues we encounter when writing the tests that cause instability and that has to be accounted for but once the suite is tried and tested it is very stable.
 
-  For me personally there is no comparison of the two, but there is no question about difficulty of comparison between two images and working with Python objects. Working with objects will always be more stable.
+  For me personally there is no comparison of the two, but there is no question about difficulty of comparing two images and working with Python objects. Working with objects will always be more stable.
 
 ## Usage with GTK4
 
