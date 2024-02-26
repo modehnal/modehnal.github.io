@@ -1,4 +1,4 @@
-<!-- Have to start with h2 as github pages print the first header twice with .md -->
+<!-- Have to start with h2 as github pages prints the first header twice with .md -->
 <h2> Table of contents</h2> <!-- omit from toc -->
 
 - [Introduction](#introduction)
@@ -1129,8 +1129,7 @@ I have started to develop qecore only a few years back, so this project is relat
   Detailed description:
   - Set some variables for later
   - Define set of non-repeating tests. We do not repeat tests that are known to fail for various reason like bugs or test instability.
-  - We are installing `dogtail` as rpm. It is rare, but there can be a situation when that repository is not available when the machine is being installed. Let's not fail here and try to install the `dogtail` one more time.
-  - Set up the `opencv`
+  - Set up the `opencv` - provided as an example, this suite does not use opencv.
   - Setup `qecore` - we do this here because not every project is using `qecore` for example `NetworkManager`. So we install qecore only in projects that require it.
   - Define different start for `x86_64` and other architectures and define a number of fails the test can go through before we say it failed
   - List coredumpctl so that we know if the component coredumped. The test can pass, and the component can still generate coredump entry.
@@ -1164,7 +1163,7 @@ I have started to develop qecore only a few years back, so this project is relat
 
   I still hope I will be able to remove this method in the future and figure out the size of the `shadows` dynamically based on the application, so that the user is not forced to make manually offset for all clicks, although my recent experimenting and research is proving me wrong.
 
-  This offset, while working with GTK4, will now cause the GTK3 applications actions to be in the wrong place and there is no reason for a suite to not use both.
+  This offset, while working with GTK4, will now cause the GTK3 applications actions to be in the wrong place and there is no reason for a suite to not work with both.
 
 ## Usage with Fedora 39
 
