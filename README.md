@@ -415,7 +415,7 @@ I have started to develop qecore only a few years back, so this project is relat
 
     From the example you can see that the `gnome-terminal` application was saved to the `context.terminal` variable. The method called was executed on `context.sandbox` which is `get_application`. This is required so that `sandbox` can keep the track of all applications defined so that it can do a proper cleanup after the suite ends.
 
-    You can also see the parameters. All of them have their usage to properly identify the desktop file and its presence in Atspi tree. There are some minor debug prints on wrong usage to help new users identify issues. For example when you would not define the `desktop_file_name` for `gnome-terminal` you would get following output prompting the user to specify the `.desktop` file since from the data provided we ere not able to decide what the user wanted to use:
+    You can also see the parameters. All of them have their usage to properly identify the desktop file and its presence in Atspi tree. There are some minor debug prints on wrong usage to help new users identify issues. For example when you would not define the `desktop_file_name` for `gnome-terminal` you would get following output prompting the user to specify the `.desktop` file since from the data provided we were not able to decide what the user wanted to use:
 
     ```console
     Environment error: before_all: More than one .desktop file found:
@@ -513,7 +513,7 @@ I have started to develop qecore only a few years back, so this project is relat
     from qecore.common_steps import *
     ```
 
-    In following example, apart from one step 'Terminal contains...', I did not have to implement all other steps, and I was able to successfully write and execute a test:
+    In following example, apart from one step `Terminal contains...`, I did not have to implement all other steps, and I was able to successfully write and execute a test:
 
     ```gherkin
     @copy_and_paste
@@ -577,6 +577,7 @@ I have started to develop qecore only a few years back, so this project is relat
     - **Backtrace** - once there is an issue with the core component we are testing and a coredump is detected via `coredumpctl`, qecore will attempt to get backtrace from `gdb` after installing all available debuginfo and debugsource packages that the `gdb` will say it needs. This needs to be toggled on as it takes quite a lot of time and space. You will see the resulting backtrace attached in example report. **backtrace_from_coredump_zenity_example.html**.
     - **Logging** - we have a continuous logging of qecore and what it does. Once any test fails, its logging data are attached to the HTML report to make sure qecore did not cause the mistake. We also can make sure the qecore is working as intended at all times. This logging can be also directed to the console, so user will be able to see it in real time. You can try it in the provided project with `$ LOGGING=true behave -kt start_via_command`
     - **Image matching** - from time to time there is a use case, where the accessibility is not working correctly, or the accessibility data is not there at all. For these situations we cannot do much, but we took an inspiration from OpenQA. In such cases we can identify widget and parts of the desktop simply with an image (`needle`) and try to find that image in the screenshot we take. These functions will return coordinates to us, and we can click to the correct place. The qecore has an image matching section that can be imported and used. It also provides pre-coded steps that are used most of the time. For the times you need to adjust the execution, we provide the `Matcher` class and its methods, so that you can build your custom functionality easily. For exact implementation and usage you can look here https://gitlab.com/dogtail/qecore/-/blob/master/qecore/image_matching.py
+
 
   - #### Summary for the qecore and why we need it
 
@@ -1000,7 +1001,7 @@ I have started to develop qecore only a few years back, so this project is relat
 
   *A little disclaimer. Use with care on large trees like gnome-shell, it will take a very long time, this feature was not written with efficiency in mind. For large trees the dump() method is faster.*
 
-  ```python
+  ```
   In : app.tree()
   [gnome-terminal-server-application-]
     └── [test@localhost-live:~-frame-]
