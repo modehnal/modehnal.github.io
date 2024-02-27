@@ -326,7 +326,7 @@ I have started to develop qecore only a few years back, so this project is relat
     - It makes sure the restart is done cleanly by checking logind
     - It sets up other configuration to allow you to figure out system issues, like issue of accessibility turning off
     - It will adapt gsettings values which we use most of the time and can sometime be annoying to deal with by hand
-    - It does extensive troubleshooting when the GDM start fails (TODO LINK IMAGE HERE - pending final article location)
+    - It does extensive troubleshooting when the GDM start fails (<a href="https://modehnal.github.io/data/headless_colour_troubleshooting.png">The qecore-headless troubleshooting</a>)
     - It can enforce session type, meaning it will check the system configuration and running session and will fail on mismatch
     - It provides `--keep <int>` parameter, enabling to use one session for multiple tests. For example `qecore-headless --keep 5 "behave -kt <test_name>"` will make sure it runs 5 tests before restarting the session.
     - I am testing this script on RHEL8/9, Fedoras from version 35 to rawhide and on multiple architectures namely x86_64, ppc64le, aarch64 and s390x. It works on these architectures and systems out of the box.
@@ -1141,7 +1141,6 @@ I have started to develop qecore only a few years back, so this project is relat
   - <a href="https://modehnal.github.io/data/gnome_terminal_test_example.webm">Video prepared, side by side of session with command line</a>
   - <a href="https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html">Backtrace from coredump Example</a>
   - <a href="https://modehnal.github.io/data/full_report_example.html">Full HTML Report Example</a>
-  - <a href="https://modehnal.github.io/data/headless_colour_troubleshooting.png">The qecore-headless troubleshooting</a>
 
 
 ## Comparison of OpenQA vs Accessibility
