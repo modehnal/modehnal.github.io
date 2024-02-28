@@ -144,14 +144,14 @@ We have years of experience in this. Accessibility is not always in the state we
 
 I will show how to build and use ponytail in the `Full project example` section.
 
-The ponytail project repository is located here <a href="https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon">gnome-ponytail-daemon</a>
+The ponytail project repository is located here [gnome-ponytail-daemon](https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon)
 
 You will notice that there is an example how to use `gnome-ponytail-daemon` for automation without a `dogtail` API. The `ponytail` API is used by `dogtail` when required.
 
 ### Giving the API a structure to be used in automation - behave
 
 So now we have explained what APIs we use at the base level. Now we need some structure to use this and have the code base scalable.
-We use <a href="https://github.com/behave/behave">behave</a> and its file structure as our automation structure.
+We use [behave](https://github.com/behave/behave) and its file structure as our automation structure.
 
 While the `behave` structure is very simple:
 ```
@@ -281,7 +281,7 @@ The result of the `behave` run you saw above is given to the console in a `prett
 
 Unfortunately, none of them are really useful to the extent of what we need in terms of reporting the result and debugging if something goes wrong.
 
-New formatter can be added as a module to the `behave`. We provide the formatter as a Python module available from `pypi` <a href="https://pypi.org/project/behave-html-pretty-formatter/">behave-html-pretty-formatter</a>.
+New formatter can be added as a module to the `behave`. We provide the formatter as a Python module available from `pypi` [behave-html-pretty-formatter](https://pypi.org/project/behave-html-pretty-formatter/)
 
 All that remains is to connect the module to the `behave` so that `behave` can use the new formatter. And this is done in the `behave.ini` file you saw in our project structure. Once the `behave.ini` file has the configuration of the `behave-html-pretty-formatter`, it will be seen by `behave` and can now be used when running the `behave`.
 
@@ -324,35 +324,37 @@ You can see example pages in the `Examples` section below.
 
 Now, we have our APIs, a project structure for our automation, and we also have a self-contained HTML page that will contain full result of the single test, multiple tests or even entire features.
 
-TEST The project page can be found here [behave-html-pretty-formatter](https://github.com/behave-contrib/behave-html-pretty-formatter)
-The project page can be found here https://github.com/behave-contrib/behave-html-pretty-formatter.
+The project page can be found here [behave-html-pretty-formatter](https://github.com/behave-contrib/behave-html-pretty-formatter)
+
 
 We can start the automating at this point. Although for the purpose of a general automation that will be very hard, as you would start from scratch and I imagine you would like to have much more that what is presented. Which is where `qecore` comes in.
 
 ### Filling all the gaps and providing useful tools with the qecore project
 
-Qecore is a library of tools and commonly used functions that are required throughout our entire automation stack.
+The `qecore` project is a library of tools and commonly used functions that are required throughout our entire automation stack.
 
-The project page can be found here https://gitlab.com/dogtail/qecore.
+The project page can be found here [qecore](https://gitlab.com/dogtail/qecore).
 
-I have started to develop qecore only a few years back, so this project is relatively new and is being continuously developed and improved with new features and is indispensable for our day-to-day use when working with GNOME Applications.
+I have started to develop `qecore` only a few years back, so this project is relatively new and is being continuously developed and improved with new features and is indispensable for our day-to-day use when working with GNOME Applications.
 
   - #### Starting new session
 
-    Let's start with another part of our automation stack that cannot be left out and is the key to every single test (or at least most of them). While we have everything needed, there are situations where the session or application will freeze or otherwise will become unusable. We would like to do everything in one session but from our experience, this is in most cases not ideal or straight up not feasible.
+    Let us start with another part of our automation stack that cannot be left out and is the key to every single test (or at least most of them). While we have everything needed, there are situations where the session or application will freeze or otherwise will become unusable. We would like to do everything in one session but from our experience, this is, in most cases, not ideal or straight up not feasible.
 
-    So we need to restart the session on command and start a new one in a moments notice, while not interrupting the test suite run. This is provided by `qecore` in the form of a script `qecore-headless`. The naming of the script is purely historical, it comes from the time we were running our suites on headless systems with dummy drivers. Currently, it serves as our session configuration tool. We run every single test in a new session, meaning that the test starts, the new GDM session is started, the test is executed, report results and GDM session is stopped. That way the next test will start with new session and no cleanup is required (although if qecore is set up correctly it will do the cleanup in the session and enable multiple runs in single session).
+    So we need to restart the session on command and start a new one in a moments notice, while not interrupting the test suite run. This is provided by `qecore` in the form of a script `qecore-headless`.
+
+    The naming of the script is purely historical, it comes from the time we were running our suites on headless systems with dummy drivers. Currently, it serves as our session configuration tool. We run every single test in a new session, meaning that the test starts, the new GDM session is started, the test is executed, report results and GDM session is stopped. That way the next test will start with new session and no cleanup is required (although if `qecore` is set up correctly it will do the cleanup in the session and enable multiple runs in single session).
 
     The `qecore-headless` script provides much more than that though:
     - Enables accessibility toolkit
-    - It changes GDM custom.conf configuration to autologin test user without password so that the GDM login page is not in the way
-    - It takes care of environment variables that are required for the system and for our suites which will be used by every Python behave run
+    - It changes GDM custom.conf configuration to autologin `test` user without password so that the GDM login page is not in the way
+    - It loads the environment variables from process `gnome-session-binary`. More specifically we look in the `/proc/<pid>/environ` take all values, add our own, and inject them to the os.environ of the `behave` so that our tests act as if they are running from the session itself. With this we can `fool` the system most of the time but there are cases where it is not enough, although the workarounds are simple.
     - It configures user session in sense that you can choose if you would like to start Xorg `qecore-headless --session-type xorg` or Wayland `qecore-headless --session-type wayland`
     - It is able to configure user desktop, namely GNOME `qecore-headless --session-desktop gnome` and GNOME Classic `qecore-headless --session-desktop gnome-classic`
-    - It makes sure the restart is done cleanly by checking logind
-    - It sets up other configuration to allow you to figure out system issues, like issue of accessibility turning off
-    - It will adapt gsettings values which we use most of the time and can sometime be annoying to deal with by hand
-    - It does extensive troubleshooting when the GDM start fails (<a href="https://modehnal.github.io/data/headless_colour_troubleshooting.png">The qecore-headless troubleshooting</a>)
+    - It makes sure the restart is done cleanly by checking `logind`
+    - It sets up other configuration to allow you to figure out system issues, like issue of `accessibility toolkit` turning off
+    - It will adapt `gsettings` values which we use most of the time and can sometime be annoying to deal with by hand
+    - It does extensive troubleshooting when the GDM start fails ([The qecore-headless troubleshooting](https://modehnal.github.io/data/headless_colour_troubleshooting.png)) In the example you will not see anything wrong, I forced the error by stopping the gdm before the end of the setup.
     - It can enforce session type, meaning it will check the system configuration and running session and will fail on mismatch
     - It provides `--keep <int>` parameter, enabling to use one session for multiple tests. For example `qecore-headless --keep 5 "behave -kt <test_name>"` will make sure it runs 5 tests before restarting the session.
     - I am testing this script on RHEL8/9, Fedoras from version 35 to rawhide and on multiple architectures namely x86_64, ppc64le, aarch64 and s390x. It works on these architectures and systems out of the box.
@@ -377,13 +379,13 @@ I have started to develop qecore only a few years back, so this project is relat
       [test@localhost]$
     ```
 
-  - #### Sandbox configuration
+  - #### TestSandbox configuration
 
     We start the suite with some commonly used methods and functions.
 
-    This is done with the qecore class `TestSandbox` that will take care of everything. I will use example from the full example of `gnome-terminal` that I will be introducing later in this article.
+    This is done with the `qecore` class `TestSandbox` that we will use for everything. I will use example from the full example of `gnome-terminal` that I will be introducing later in this article.
 
-    The behave file `environment.py` has a few defined functions that behave as hooks for, which we can fill with logic that we need. So we are going to use the `before_all` and initialize our `TestSandbox` class and save it to the variable `context` which is a data structure of behave that can be used to save and transfer data throughout all the files during the behave run. We can define our variables in `context`, so we named it `context.sandbox`. From this moment the sandbox class will be available in the Python behave files, and we can start using our `sandbox`. I again omitted some parts for simplicity, the full example will have the entire structure.
+    The behave file `environment.py` has a few defined functions that `behave` has hooks for, which we can fill with logic that we need. So we are going to use the `before_all` and initialize our `TestSandbox` class and save it to the variable `context` which is a data structure of behave that can be used to save and transfer data throughout all the files during the behave run. We can define our variables in `context`, so we named it `context.sandbox`. From this moment the sandbox class will be available in the Python `behave` files, and we can start using our `sandbox`. I again omitted some parts for simplicity, the full example will have the entire structure.
 
     ```python
     def before_all(context) -> None:
@@ -395,23 +397,23 @@ I have started to develop qecore only a few years back, so this project is relat
 
     The `TestSandbox` class has been initialized, and initial attributes have been set, this will control everything and can be used with great degree of customization. There are some functions that will be also executed in this part:
     - Checking against `os.environ` which we use for custom runs for example
-      - logging (verbose qecore execution)
+      - logging (verbose `qecore` execution)
       - delete all cached files to be created anew (default is to keep the data between runs)
       - to embed all data we have despite the test results (default behavior is to embed debug data only on failed runs to save space)
-      - enable backtrace generation from coredumps with debuginfo and debugsource installation (this takes a lot of time and space, so default behavior is to skip backtrace fetching)
+      - enable backtrace generation from coredumps with debuginfo and debugsource installation (this takes a lot of time and space, so the default behavior is to skip backtrace fetching)
       - enable other G_DEBUG options
     - Some initial debugging and checks
     - Initialization of default suite run
     - Retrieve system data like architecture, distribution, display, session desktop and type. We need to differentiate based on these sometimes, so the `context.sandbox` will provide all the data for the suite.
-    - The parameters of the class are the name of the test suite and the context, which is required to get the data from context to `TestSandbox` where we can manipulate it.
+    - The parameters of the class are the `name` of the test suite and the `context`, which is required to get the data from context to `TestSandbox` where we can manipulate it.
 
     Now this is already quite a lot but the only thing that is needed by the user is to have the class initialized in the `environment.py` and `TestSandbox` will do the rest.
 
   - #### Application configuration
 
-    When executing any test suite, the user needs to identify an application that the suite will be using. For the purpose of automation of `gnome-terminal` on `Fedora` you can see we need to define 3 "applications". The `gnome-terminal` itself, the `preferences` which from some version is in Atspi as a standalone application and `gnome-control-center` named as settings.
+    When executing any test suite, the user needs to identify an application that the suite will be using. For the purpose of automation of `gnome-terminal` on `Fedora` you can see we need to define 3 "applications". The `gnome-terminal` itself, the `preferences` which from some version is in `Atspi` as a standalone application and `gnome-control-center` named as settings.
 
-    This allows seamless function of start/stop tests which will take the data from their respective '.desktop' files and use it for its correct function.
+    This allows seamless function of start/stop tests which will take the data from their respective `.desktop` files and use it for its correct function.
 
     ```python
     def before_all(context) -> None:
@@ -441,7 +443,7 @@ I have started to develop qecore only a few years back, so this project is relat
 
     From the example you can see that the `gnome-terminal` application was saved to the `context.terminal` variable. The method called was executed on `context.sandbox` which is `get_application`. This is required so that `sandbox` can keep the track of all applications defined so that it can do a proper cleanup after the suite ends.
 
-    You can also see the parameters. All of them have their usage to properly identify the desktop file and its presence in Atspi tree. There are some minor debug prints on wrong usage to help new users identify issues. For example when you would not define the `desktop_file_name` for `gnome-terminal` you would get following output prompting the user to specify the `.desktop` file since from the data provided we were not able to decide what the user wanted to use:
+    You can also see the parameters. All of them have their usage to properly identify the desktop file and its presence in `Atspi` tree. There are some minor debug prints on wrong usage to help new users identify issues. For example when you would not define the `desktop_file_name` for `gnome-terminal` you would get following output prompting the user to specify the `.desktop` file since from the data provided we were not able to decide what the user wanted to use:
 
     ```console
     Environment error: before_all: More than one .desktop file found:
@@ -455,13 +457,13 @@ I have started to develop qecore only a few years back, so this project is relat
         ' ... = context.sandbox.get_application(..., desktop_file_name="", desktop_file_path="")
     ```
 
-    This concludes the `before_all` function and this setup will most likely never change apart from '.desktop' file changes, in such case you would need to do minor changes to parameters.
+    This concludes the `before_all` function and this setup will most likely never change apart from `.desktop` file changes, in such case you would need to do minor changes to parameters.
 
-    In the full example you can also see try/except usage. That is for recovery. Some issues can be fixed while running.
+    In the full example you can also see try/except usage. That is for recovery. Some issues can be fixed while running. We also need a way to end gracefully so that our data is loaded to the HTML page and not thrown away in case of a problem.
 
   - #### Before Scenario
 
-    Now for the behave's `before_scenario` function that gets executed before each test, this is where most of the work will be done by qecore's `sandbox`. But all the user needs to do is to call this method and that is all. Nothing more, nothing less.
+    Now for the `behave`'s `before_scenario` function that gets executed before each test, this is where most of the work will be done by `qecore`'s `sandbox`. But all the user needs to do is to call this method and that is all. Nothing more, nothing less.
 
 
     ```python
@@ -474,19 +476,20 @@ I have started to develop qecore only a few years back, so this project is relat
     ```
 
     To list off some things that the `before_scenario` does:
-      - Waiting until `gnome-shell` becomes responsive, there is no point to continue until `gnome-shell` can be found in the Atspi tree
+      - Waiting until `gnome-shell` becomes responsive, there is no point to continue until `gnome-shell` can be found in the `Atspi` tree
       - Also sets some attributes that can be used to manipulate the run
       - Sets timers for current scenarios
       - Closes welcome tour - we need to have empty session, so we can test
-      - Closes yelp
-      - Closes initial setup
-      - Sets blank screen to never - we need even test cases that are idle for a long period of time and don't lock the session
+      - Closes yelp if opened
+      - Closes initial setup if opened
+      - Sets blank screen to never - we have test cases that are idle for a long period of time, so we need the automatic lock to not apply here
       - Sets up embedding for `behave-html-pretty-formatter` - attaching data to the HTML logs
       - Makes preparations for asynchronous calls like timeout from the host machine
       - Creates new keyring so that we are not bothered by polkit dialogs during the suite run
       - Returning to the home workspace
       - Starts the recording - this is priceless when debugging or reporting bugs. Video of the bug reproducer ready to go.
       - There are many more, but a lot of them are not important in the context of this article
+
 
   - #### After Scenario
 
@@ -1164,10 +1167,9 @@ I have started to develop qecore only a few years back, so this project is relat
 
 ## Examples
 
-  - <a href="https://modehnal.github.io/data/gnome_terminal_test_example.webm">Video prepared, side by side of session with command line</a>
-  - <a href="https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html">Backtrace from coredump Example</a>
-  - <a href="https://modehnal.github.io/data/full_report_example.html">Full HTML Report Example</a>
-
+  - [Video example, side by side of session with command line](https://modehnal.github.io/data/gnome_terminal_test_example.webm)
+  - [Backtrace from coredump Example](https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html)
+  - [Full HTML Report Example](https://modehnal.github.io/data/full_report_example.html)
 
 ## Comparison of OpenQA vs Accessibility
 
