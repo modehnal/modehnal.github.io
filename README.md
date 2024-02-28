@@ -69,7 +69,7 @@ We are using the dogtail project as an API for all we do. The reality of things 
     └──────────────────────────────────┘
 ```
 
-Here you can see a very minimal example of how we interact with applications, provided you have a running session and the accessibility toolkit is enabled. This example will open overview, start gnome-terminal and execute a command:
+Below you can see a simple example of how we interact with applications, provided you have a running session and the accessibility toolkit is enabled. This example will open overview, start gnome-terminal and execute a command:
 
 ```python
     #!/usr/bin/python3
@@ -119,39 +119,41 @@ Here you can see a very minimal example of how we interact with applications, pr
     pressKey("Enter") # Confirm command.
 ```
 
-I will give a more thorough example within the `gnome-terminal` project.
+With these basic queries we can do quite a lot.
 
 
 ### How are we dealing with automation on Wayland? The gnome-ponytail-daemon
 
 While the example provided above will work for Xorg. For Wayland there is an extra step we need to do in order to successfully navigate the application via correct coordinates.
 
-With Wayland, there is no translation of application coordinates to screen coordinates. Meaning that if we have a button in the top left corner of the application and the application is in the middle of the screen, the click itself will be translated to the top left corner of the screen and not into the application window. Therefore, missing the click and failing the step.
+With Wayland, there is no translation of window coordinates to desktop coordinates. Meaning that if we have a button in the top left corner of the application and the application is in the middle of the screen, the click itself will be translated to the top left corner of the screen and not into the application window. Therefore, missing the click and failing the step.
 
-Fortunately we have a solution in the form of a `gnome-ponytail-daemon`. This project was written by Olivier Fourdan `@ofourdan` and was based on gnome-remote-desktop written by Jonas Adahl `@jadahl`. I would also like to mention a new developer that recently joined our team José Expósito `@jexposit` who already contributed to the `gnome-ponytail-daemon` project. Most changes are communicated afterwards for which I can verify the stability with our suites.
+Fortunately we have a solution in the form of a `gnome-ponytail-daemon`. This project was written by Olivier Fourdan `@ofourdan` and was based on gnome-remote-desktop written by Jonas Adahl `@jadahl`. I would also like to mention a new developer that recently joined our team José Expósito `@jexposit` who already contributed to the `gnome-ponytail-daemon` project. Changes are communicated to us after which we can verify the function with our suites. Since we depend on ponytail for translation of coordinates, any issue will show quickly.
 
-On GNOME on Wayland there are screencasts and remote desktop APIs that can be used for controlling the keyboard and cursor. Since Wayland does not expose global screen coordinates and the usual process will return local coordinates of the various application widgets, this is where the RecordWindow method from screencast can be used, as it will translate global coordinates into surface relative coordinates.
+With GNOME on Wayland we have screencasts and remote desktop APIs that can be used for controlling the keyboard and cursor. Wayland does not expose desktop coordinates and the usual process will return window coordinates of the various application widgets, which is where the `RecordWindow` method from screencast can be used, as it will translate global coordinates into surface relative coordinates.
 
-To record any given window, there is a need to identify such window, which is where window-list API comes in. The Introspect D-BUS API in mutter provides a way to list all toplevel windows.
+To record any given window, there is a need to identify such window, for this we use `window-list` API. The Introspect D-BUS API in mutter provides a way to list all toplevel windows.
 
-Functions from this project that connect a window and do actions in it for automation are integrated in dogtail project to be used seamlessly without any required user setup. So in effect, everything between Xorg and Wayland on our automation side is exactly the same and functions are handled differently on the dogtail side.
+Functions from this project that connect a window and do actions in it for automation are integrated in `dogtail` project to be used seamlessly without any required user setup. So in effect, everything between Xorg and Wayland on our automation side is exactly the same and functions are handled differently on the `dogtail` side.
 
-There are of course some shortcomings. In rare cases we need to test a feature that dogtail does not have a function for, the user needs to manually change window connection, but such cases are rare enough that examples for these cases fall out of the scope of this article.
+There are of course some shortcomings. In rare cases we need to test a feature that `dogtail` does not have a function for, the user needs to manually change window connection, but such cases are rare enough that examples for these cases fall out of the scope of this article.
 
-If there would be a need for a very specific test case, the dogtail and ponytail can be used in unusual ways (read: hacked around).
+If there would be a need for a very specific test case, the `dogtail` and `ponytail` can be used in unusual ways (read: hacked around).
 With enough knowledge about the system and how these APIs work, a lot of things can be done even if they are not provided as methods and functions.
 We have years of experience in this. Accessibility is not always in the state we would like it to be in, but we can work around issues most of the time.
 
 I will show how to build and use ponytail in the `Full project example` section.
 
-The ponytail project repository is located here https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon
+The ponytail project repository is located here <a href="https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon">gnome-ponytail-daemon</a>
+
+You will notice that there is an example how to use `gnome-ponytail-daemon` for automation without a `dogtail` API. The `ponytail` API is used by `dogtail` when required.
 
 ### Giving the API a structure to be used in automation - behave
 
 So now we have explained what APIs we use at the base level. Now we need some structure to use this and have the code base scalable.
-We use behave https://github.com/behave/behave and its file structure as our automation structure.
+We use <a href="https://github.com/behave/behave">behave</a> and its file structure as our automation structure.
 
-While the behave structure is very simple:
+While the `behave` structure is very simple:
 ```
     features
     ├── environment.py
@@ -214,7 +216,7 @@ The steps.py file contents are as follows:
         pass
 ```
 
-You can see bellow a better visualization structure of the behave's `.feature` files. Single feature files can contain multiple `Scenarios` and each scenario contains `Steps` that are implemented in `steps.py` file that is located in `steps` directory:
+To better visualize the structure of the `behave`'s `.feature` files. Single `Feature` file can contain multiple `Scenarios` and each `Scenario` contains `Steps` that are implemented in `steps.py` file that is located in `steps` directory:
 
     ┌───────────────────────────────────────────────────────────────────────────────────┐
     │         ┌────────────────────────────────┐ ┌────────────────────────────────┐     │
@@ -225,7 +227,7 @@ You can see bellow a better visualization structure of the behave's `.feature` f
     └───────────────────────────────────────────────────────────────────────────────────┘
 
 
-Now we can run behave:
+Now we can run `behave`:
 
 ```console
 
@@ -241,15 +243,19 @@ Now we can run behave:
     1 scenario passed, 0 failed, 0 skipped
     3 steps passed, 0 failed, 0 skipped, 0 undefined
 ```
-The behave run was a success, now we can use behave to run all of our test cases with ease.
+The `behave` run was a success, now we can use `behave` to run all of our test cases with ease.
 
-For all of our test cases, we are using tags to differentiate between different scenarios. So while `$ behave` will start every single scenario defined in feature files, our best practice is to start test cases one by one and separate them into their own result pages, which I will get into later. So we are running behave like this `$ behave -kt showing_off_behave`. The `-k` (note that in development version of behave `v1.2.7.dev#` this is available as `--no-skipped`, in the current pypi version 1.2.6 `-k` is still working) will skip all unexecuted tests, so they are not printed in summary and `-t` will match the tag in feature file and will start that one specific scenario. One tag can be used any number of times, so we can mark the whole scenario with one tag and start the execution that will run multiple tests.
+For all of our test cases, we are using `tags` to differentiate between different scenarios.
+
+So while `$ behave` will start every single scenario defined in feature files, our best practice is to start test cases one by one and separate them into their own result pages, which I will get into later.
+
+We are running `behave` like this `$ behave -kt showing_off_behave`. The `-k` (note that in development version of behave `v1.2.7.dev#` this is available as `--no-skipped`, in the current pypi version 1.2.6 `-k` is still working) will skip all unexecuted tests, so they are not printed in summary and `-t` will match the `tag` in `feature` file and will start that one specific `scenario`. One `tag` can be used any number of times, so we can mark the whole `scenario` with one `tag` and start the execution that will run multiple tests.
 
 For the example bellow, we can start specific test by `$ behave -kt dummy_1` or run them both as `$ behave -kt dummy`. Of course if we have only those 2, the equivalent command is `$ behave`. If there are many more tests, we do not want to duplicate the tag too many times, therefore we can tag the entire feature file and start all scenarios in given feature file as `$ behave -kt dummy_feature`.
 
-To use finer execution of a few tests from a larger set, you can execute the behave with a list of tags `$ behave -k --tags="dummy_1,dummy_2"`.
+To use finer execution of a few tests from a larger set, you can execute the `behave` with a list of tags `$ behave -k --tags="dummy_1,dummy_2"`.
 
-Note that instead of `Given`, `When`, `Then`, `And` and `But` we can use asterisk `*` to prefix all steps in feature files. We use asterisk in most cases.
+Note that instead of `Given`, `When`, `Then`, `And` and `But` we can use asterisk `*` to prefix all `steps` in `feature` files. We use asterisk in most cases.
 
 ```gherkin
 
@@ -271,13 +277,13 @@ I have mentioned separating test scenarios executed to their own result pages. T
 
 ### The automation suite result page in form of behave-html-pretty-formatter project
 
-The result of the behave run you saw above is given to the console in a `pretty` format, which is the `Standard colourised pretty formatter`. Behave has quite a lot of formatters to use. These formatters are built-in and can be chosen from to get the resulted data in a lot of formats ready to be used for various purposes.
+The result of the `behave` run you saw above is given to the console in a `pretty` format, which is the `Standard colourised pretty formatter`. The `behave` has quite a lot of formatters to use. These formatters are built-in and can be chosen from to get the resulted data in a lot of formats ready to be used for various purposes.
 
 Unfortunately, none of them are really useful to the extent of what we need in terms of reporting the result and debugging if something goes wrong.
 
-New formatter can be added as a module to the behave. We provide the formatter as a Python module available from `pypi` https://pypi.org/project/behave-html-pretty-formatter/.
+New formatter can be added as a module to the `behave`. We provide the formatter as a Python module available from `pypi` <a href="https://pypi.org/project/behave-html-pretty-formatter/">behave-html-pretty-formatter</a>.
 
-All that remains is to connect the module to the behave so that behave can use the new formatter. And this is done in the `behave.ini` file you saw in our project structure. Once the `behave.ini` file has the configuration of the `behave-html-pretty-formatter`, it will be seen by behave and can now be used when running the behave.
+All that remains is to connect the module to the `behave` so that `behave` can use the new formatter. And this is done in the `behave.ini` file you saw in our project structure. Once the `behave.ini` file has the configuration of the `behave-html-pretty-formatter`, it will be seen by `behave` and can now be used when running the `behave`.
 
 This is the `behave.ini` file you will see in the `gnome-terminal` automation example:
 ```ini
@@ -308,7 +314,7 @@ This is the `behave.ini` file you will see in the `gnome-terminal` automation ex
   behave.formatter.html-pretty.collapse = auto
 ```
 
-That run will be now executed as `$ behave -kt dummy -f html-pretty -o test.html`. This will change the formatter from the default `pretty` to the `html-pretty` that will take the data from behave, transform them and generate self-contained HTML page to the output file `test.html`. Our test result files are named after the test case that was executed but omitted here for simplicity.
+That run will be now executed as `$ behave -kt dummy -f html-pretty -o test.html`. This will change the formatter from the default `pretty` to the `html-pretty` that will take the data from `behave`, transform them and generate self-contained HTML page to the output file `test.html`. Our test result files are named after the test case that was executed but omitted here for simplicity.
 
 We made the new formatter `html-pretty` less than a year ago (January 2023) to improve the old `html` formatter. The new `html-pretty` formatter is coded in a very different way and can be more easily enriched with new features. It is also, in our opinion, much cleaner and simpler, while allowing us to have more data available to us. Output of this project allows us to have a self-contained HTML page so that the test results are always in this single file with CSS and JS. The page contains a lot of information. It prints each step and provides data if something goes wrong.
 
@@ -316,8 +322,9 @@ Although the formatter supports quite a lot of use cases e.g. compression of dat
 
 You can see example pages in the `Examples` section below.
 
-Now, we have our API, a project structure for our automation, and we also have a self-contained HTML page that will contain full result of the single test, multiple tests or even entire features.
+Now, we have our APIs, a project structure for our automation, and we also have a self-contained HTML page that will contain full result of the single test, multiple tests or even entire features.
 
+TEST The project page can be found here [behave-html-pretty-formatter](https://github.com/behave-contrib/behave-html-pretty-formatter)
 The project page can be found here https://github.com/behave-contrib/behave-html-pretty-formatter.
 
 We can start the automating at this point. Although for the purpose of a general automation that will be very hard, as you would start from scratch and I imagine you would like to have much more that what is presented. Which is where `qecore` comes in.
