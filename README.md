@@ -1267,13 +1267,13 @@ I have started to develop `qecore` only a few years back, so this project is rel
   Currently, there is no incentive to focus on reimplementation as what we now have works fine and most of our suites are written and are being adapted between package and system versions. There are situations where new feature or bug appears, and we include it in our suite, but that is using previously used functions, so there is nothing new from the testing point of view.
 
   I am going to include personal experience when I first started working at Red Hat.
-  I was assigned a responsibility of a project `gnome-contacts`. The automation was already written, and I was required to understand the code, learn how to use it, modify it and improve it. At first, I was just copying around what was already there, and I had no issues making it work. Until I encountered a strange artifact, function not working. It was the same as any other function used in the code. I had no idea why it was not working. I found dogtail source code and went, though it and I saw nothing wrong. No one was able to help me as they did not see anything wrong on the `dogtail` side either. So I marked the test as broken or simply worked around it, I do not remember. It was quite a while before I realized the dogtail is not a full API but a wrapper and extension of others. So I started looking for the other libraries imported in `dogtail`, in `pyatspi2` and finally `Atspi`. I found a documentation that I do not believe was up-to-date, but it was usable. I found the C source code. Furthermore, I went through it to verify missing documentation parts. I still do not know the exact source code and documentation, I might have been looking at the wrong place altogether. Most of the stuff I tried that I know are or are not working, is a result of experimentation. As I mentioned there is not much time, so trial and error was the chosen solution. I started making reproducer in `Atspi`, only to find I am able to reproduce the issue I had in the past quite a lot and always thought the `dogtail` was not working.
+  I was assigned a responsibility of a project `gnome-contacts`. The automation was already written, and I was required to understand the code, learn how to use it, modify it and improve it. At first, I was just copying around what was already there, and I had no issues making it work. Until I encountered a strange artifact, function not working. It was the same as any other function used in the code. I had no idea why it was not working. I found `dogtail` source code and went through it and I saw nothing wrong. No one was able to help me as they did not see anything wrong on the `dogtail` side either. So I marked the test as broken or simply worked around it, I do not remember. It was quite a while before I realized the `dogtail` is not a full API but a wrapper and extension of others. So I started looking for the other libraries imported in `dogtail`, in `pyatspi2` and finally `Atspi`. I found a documentation that I do not believe was up-to-date, but it was usable. I found the C source code. Furthermore, I went through it to verify missing documentation parts. I still do not know the exact source code and documentation, I might have been looking at the wrong place altogether. Most of the stuff I tried that I know are or are not working, is a result of experimentation. As I mentioned there is not much time, so trial and error was the chosen solution. I started making reproducer in `Atspi`, only to find I am able to reproduce the issue I had in the past quite a lot and always thought the `dogtail` was not working.
 
   The point is that the issue that was in the code for years was not identified because no one knew where to look. I had no one to teach me where to look or to say that the problem might be somewhere else, because it was poorly documented, and I did not find any tutorials how to debug such issues.
 
   `Aspirations` is to improve `dogtail`, but not in that project - an alternative to dogtail. Dogtail is implementing its own functions, it wraps over `pyatpsi2` and `Atspi`, while `pyatspi2` also wraps over `Atspi`, so debugging is a problem.
 
-  To make sure problems are in the `Atspi` library, I had no other option than to make lightweight clone of `dogtail` and not wrapping over anything other than `Atspi`. I did the bare minimum to make the API work and to verify some specific issue was having a source in Atspi. It was a success. I was seeing the same issue without any use of `dogtail` and `pyatspi2`.
+  To make sure problems are in the `Atspi` library, I had no other option than to make lightweight clone of `dogtail` and not wrapping over anything other than `Atspi`. I did the bare minimum to make the API work and to verify some specific issue was having a source in Atspi. It was a success. I saw the same issues without any use of `dogtail` and `pyatspi2`.
 
   The `GNOMEAutomation` would provide API just like `dogtail`, but wrapping only over `Atspi` so any issue that is found will have a single source. The best case scenario would be pointing developers to the API and have them see that we are using the `Atspi` functions, so it cannot be an issue we introduced. They will also get a reproducer directly to the `Atspi` and will not have to deal with our environment. In the worst case, installing `GNOMEAutomation` with a given project it was reproduced in, which would be start-able right away without any difficult setup. Documentation will be present from the start (I have a habit to have docstring and proper documentations everywhere) so no one will need to go on long searches to figure out what is wrong and where.
 
@@ -1308,11 +1308,11 @@ Accessibility, AT-SPI, a11y, GNOME, Fedora, Wayland, automation, suite, test, gn
 
 ## Sources
 
- - http://lazka.github.io/pgi-docs/#Atspi-2.0
- - https://github.com/behave/behave
- - https://gitlab.com/dogtail/qecore
- - https://gitlab.com/dogtail/dogtail
- - https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon
- - https://github.com/behave-contrib/behave-html-pretty-formatter
- - https://fedorapeople.org/~vhumpa/dogtail/epydoc/
- - https://github.com/modehnal/GNOMETerminalAutomation
+ - [http://lazka.github.io/pgi-docs/#Atspi-2.0](http://lazka.github.io/pgi-docs/#Atspi-2.0)
+ - [https://github.com/behave/behave](https://github.com/behave/behave)
+ - [https://gitlab.com/dogtail/qecore](https://gitlab.com/dogtail/qecore)
+ - [https://gitlab.com/dogtail/dogtail](https://gitlab.com/dogtail/dogtail)
+ - [https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon](https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon)
+ - [https://github.com/behave-contrib/behave-html-pretty-formatter](https://github.com/behave-contrib/behave-html-pretty-formatter)
+ - [https://fedorapeople.org/~vhumpa/dogtail/epydoc/](https://fedorapeople.org/~vhumpa/dogtail/epydoc/)
+ - [https://github.com/modehnal/GNOMETerminalAutomation](https://github.com/modehnal/GNOMETerminalAutomation)
