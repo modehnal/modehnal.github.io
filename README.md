@@ -493,15 +493,15 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - #### After Scenario
 
-    The behave's `after_scenario` function works the same as the name implies. This will get executed after every test. As with previous example, all the user needs to do is to call the single method and the job is done.
+    The `behave`'s `after_scenario` function works the same as the name implies. This method will get executed after every test. As with previous example, all the user needs to do is to call the single method and the job is done.
 
-      ```python
-      def after_scenario(context, scenario) -> None:
-          """
-          This function will be run after every scenario in 'behave' command called.
-          """
-          context.sandbox.after_scenario(context, scenario)
-      ```
+    ```python
+    def after_scenario(context, scenario) -> None:
+        """
+        This function will be run after every scenario in 'behave' command called.
+        """
+        context.sandbox.after_scenario(context, scenario)
+    ```
 
     Again, to list off some things that are being done:
       - Capturing the image on fail
