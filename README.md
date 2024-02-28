@@ -704,7 +704,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     ```bash
     # I cannot promise the future changes will not break anything. We are doing improvements, new features and bug fixes regularly.
     # Best practise is to fixate installed version and update the qecore when you are doing updates to automation suite so you can verify the new version still works.
-    sudo python3 -m pip install qecore==3.20
+    sudo python3 -m pip install qecore==3.24
     ```
 
   - #### Clone the GNOME Terminal test suite
