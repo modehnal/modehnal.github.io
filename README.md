@@ -488,7 +488,8 @@ I have started to develop `qecore` only a few years back, so this project is rel
       - Creates new keyring so that we are not bothered by polkit dialogs during the suite run
       - Returning to the home workspace
       - Starts the recording - this is priceless when debugging or reporting bugs. Video of the bug reproducer ready to go.
-      - There are many more, but a lot of them are not important in the context of this article
+
+    There is more, but a lot of them are not important in the context of this article
 
 
   - #### After Scenario
