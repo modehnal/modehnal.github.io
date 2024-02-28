@@ -468,11 +468,10 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     ```python
     def before_scenario(context, scenario) -> None:
-      """
-      This function will be run before every scenario in 'behave' command called.
-      """
-      context.sandbox.before_scenario(context, scenario)
-
+        """
+        This function will be run before every scenario in 'behave' command called.
+        """
+        context.sandbox.before_scenario(context, scenario)
     ```
 
     To list off some things that the `before_scenario` does:
