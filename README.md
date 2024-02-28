@@ -1198,6 +1198,8 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   This offset, while working with GTK4, will now cause the GTK3 applications actions to be in the wrong place and there is no reason for a suite to not work with both.
 
+  We are currently trying to figure out, with some level of success, how to make any differences between GTK3 and GTK4 irrelevant from the user point of view. So hopefully in the future there will be no need to have any offsets.
+
 ## Usage with Fedora 39
 
   Please beware that this article is for Fedora 38. While it will work on 39 too, there are some design changes that the `qecore` is not yet adapted for. Like the `Activities` label missing which `qecore` currently uses for closing gnome-shell overview.
