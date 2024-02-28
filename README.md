@@ -841,7 +841,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     ```
 
 
-    *This section is no longer valid. José found an issue that caused the gnome-ponytail-daemon to hang. Issue was fixed but kept here for visibility. (Requires merged changes - currently in forked location)*
+    *The following section is no longer valid. José found an issue that caused the gnome-ponytail-daemon to hang. Issue was fixed but kept here for visibility.*
 
     3. There is also possibility that the running daemon is faulty (happened to me while testing this article). When you kill the running daemon a new one will start, and it will once again work.
     ```sh
@@ -852,7 +852,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - ### **ConfigError: No steps directory in '/path/to/features'**
 
-    The behave searches for a directory `features` in your current directory. Make sure you are in a suite directory and this issue will not appear.
+    The `behave` searches for a directory `features` in your current directory. Make sure you are in a suite directory and this issue will not appear.
 
   - ### **Undefined decorator**
 
@@ -869,7 +869,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     This means your decorator line somewhere in your `.feature` files is not being correctly matched to its implementation in your `step.py` file. Add the `undefined` decorator to the steps.py file as hinted.
 
 
-  - ### **SearchError: descendant of [application | gnome-terminal-server]: child with name='<not_existing_name>'**
+  - ### **SearchError: descendant of [application | gnome-terminal-server]: child with name=<not_existing_name>**
 
     You have tried search or do an action for a widget that is not present in the `gnome-terminal` Accessibility tree. Make sure the search query uses correct data.
 
