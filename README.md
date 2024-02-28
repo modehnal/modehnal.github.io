@@ -533,7 +533,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     Over the years we have had many step implementations and usage from features. Most of the time if I wanted to do something I had to code a Python function, mark it with a decorator and use that decorator in the feature. Some of them were used in so many projects, I found myself reimplementing or copying the same step over and over. So I decided to provide them to everyone and all they have to do is to keep the format so that the `behave` can match them.
 
-    The `qecore` project location where you can see [commonly used steps](https://gitlab.com/dogtail/qecore/-/blob/master/qecore/common_steps.py)
+    The location where you can see [commonly used steps](https://gitlab.com/dogtail/qecore/-/blob/master/qecore/common_steps.py).
 
     With `common_steps.py` from `qecore`, all user has to do is the following:
 
@@ -604,9 +604,10 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     - **Flatpaks** - just as we are able to load applications with `get_application` we also have a function to work with Flatpaks `get_flatpak`.
     - **Backtrace** - once there is an issue with the core component (in this project it is `gnome-terminal`) we are testing and a coredump is detected via `coredumpctl`, `qecore` will attempt to get backtrace from `gdb` after installing all available debuginfo and debugsource packages that the `gdb` will say it needs. This needs to be toggled on as it takes quite a lot of time and space. The resulting backtrace is than attached to the report - [Backtrace from coredump Example](https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html).
-    - **Logging** - we have a continuous logging of qecore and what it does. Once any test fails, its logging data are attached to the HTML report to make sure qecore did not cause the mistake. We also can make sure the qecore is working as intended at all times. This logging can be also directed to the console, so user will be able to see it in real time. You can try it in the provided project with `$ LOGGING=true behave -kt start_via_command`
-    - **Image matching** - from time to time there is a use case, where the accessibility is not working correctly, or the accessibility data is not there at all. For these situations we cannot do much, but we took an inspiration from OpenQA. In such cases we can identify widget and parts of the desktop simply with an image (`needle`) and try to find that image in the screenshot we take. These functions will return coordinates to us, and we can click to the correct place. The qecore has an image matching section that can be imported and used. It also provides pre-coded steps that are used most of the time. For the times you need to adjust the execution, we provide the `Matcher` class and its methods, so that you can build your custom functionality easily. For exact implementation and usage you can look here https://gitlab.com/dogtail/qecore/-/blob/master/qecore/image_matching.py
+    - **Logging** - we have a continuous logging of `qecore` and what it does, our own tool can also have a bug. Once any test fails, its logging data are attached to the HTML report to make sure `qecore` did not cause the mistake. We also can make sure the `qecore` is working as intended at all times. This logging can be also directed to the console, so user will be able to see it in real time. You can try it in the provided project with `$ LOGGING=true behave -kt start_via_command`
+    - **Image matching** - from time to time there is a use case, where the accessibility is not working correctly, or the accessibility data is not there at all. For these situations we cannot do much, but we took an inspiration from OpenQA. In such cases we can identify widget and parts of the desktop simply with an image (`needle`) and try to find that image in the screenshot we take. These functions will return coordinates to us, and we can click to the correct place. The qecore has an image matching section that can be imported and used. It also provides pre-coded steps that are used most of the time. For the times you need to adjust the execution, we provide the `Matcher` class and its methods, so that you can build your custom functionality easily. For exact implementation and usage you can look in [image matching](https://gitlab.com/dogtail/qecore/-/blob/master/qecore/image_matching.py)
 
+    More features are being added frequently based on our need and ideas.
 
   - #### Summary for the qecore and why we need it
 
@@ -650,15 +651,13 @@ I have started to develop `qecore` only a few years back, so this project is rel
   echo 'test ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
   ```
 
-  Now there is the user `test` on Fedora 38 VM with sudo privileges, lets `ssh` to the machine.
-
   Most likely the `sshd` service will not be enabled, which would produce `Connection refused` for the port 22, so you might need to start the `sshd` in the VM and enable it, so it will be started in the future as well.
 
   ```sh
   systemctl enable --now sshd
   ```
 
-  Now you should have everything set on the VM side. Lets `ssh` into it.
+  Now there is the user `test` on Fedora 38 VM with sudo privileges, lets `ssh` to the machine.
 
   ```
   ssh test@<vm_ip>
@@ -671,7 +670,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   Now all we need is to get our tools to your machine, clone the GNOME Terminal automation suite repository and execute it.
 
-  It is important that following commands are executed with `sudo` if the command says so. Reason for this is consistency and not having to deal with permissions. There is also no benefit installing it in any other way. The user and automation will have full control of the machine, so we can test everything we require to.
+  It is important that following commands are executed with `sudo` if the command says so. Reason for this is consistency and not having to deal with permissions. There is also no benefit installing it in any other way. The user and automation will have full control of the machine, so we can test everything we are required to.
 
   - #### Install the API - `dogtail`
 
@@ -695,6 +694,8 @@ I have started to develop `qecore` only a few years back, so this project is rel
     sudo ninja -C build install
     cd # get back to the home directory.
     ```
+
+    The steps are being taken to enable `gnome-ponytail-daemon` on Fedora from official repositories.
 
   - #### Install the DesktopQE's automation tools - `qecore`
 
@@ -732,7 +733,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - #### Start of the automation suite
 
-    So now that you have running session, we can finally execute the automation. Let's do the simplest test - start of the GNOME Terminal.
+    Now that you have running session, we can finally execute the automation. Let's do the simplest test - start of the GNOME Terminal.
 
     It will fail without `gedit` but do not be alarmed.
 
@@ -758,7 +759,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     UserWarning: Desktop file of application 'gedit' was not found.
     ```
 
-    This is letting you know that as a user you did some kind of mistake. The error in `environment` should never be seen. The `sandbox` is designed to run only if the environment is configured properly.
+    This is letting you know that as a user you did some kind of mistake. An error in `environment` should never be seen. The `sandbox` is designed to run only if the environment is configured properly.
 
     For the error above, simply install `gedit` that is used in some tests:
 
@@ -800,7 +801,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     You can see some data noise which we can ignore for now.
 
-    If anything went wrong let me know in the GitHub Issues https://github.com/modehnal/GNOMETerminalAutomation/issues but if you followed everything, it should work.
+    If anything went wrong let me know in the [GitHub Issues](https://github.com/modehnal/GNOMETerminalAutomation/issues) but if you followed everything, it should work.
 
     If you attempt to write new tests I imagine you will encounter some issues that you can fix yourself based on the error provided.
 
@@ -830,7 +831,6 @@ I have started to develop `qecore` only a few years back, so this project is rel
     ```
 
     2. Or you can start it by hand. Although this should never be needed.
-
     ```sh
     # You can either start the daemon from the installed location.
     /usr/local/libexec/gnome-ponytail-daemon &
