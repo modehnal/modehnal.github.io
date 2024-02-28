@@ -883,7 +883,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     Most of the issues you should encounter will be based on misunderstanding of the application tree structure. With practice this will be solved.
 
-    In the meantime, you will need a knowledge how to go through the Accessibility tree by hand and check different Atspi nodes attributes to improve your queries.
+    In the meantime, you will need a knowledge how to go through the Accessibility tree by hand and check different `Atspi` nodes attributes to improve your queries.
 
     Let's use an interactive Python shell - ipython3:
 
@@ -892,7 +892,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     ipython3 # Run it.
     ```
 
-    In this interactive shell you will import the dogtail's tree root on your own and save the Atspi root of `gnome-terminal` to a variable:
+    In this interactive shell you will import the `dogtail`'s tree root on your own and save the `Atspi` root of `gnome-terminal` to a variable:
 
     ```python
     # IPython
@@ -902,7 +902,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     In : app # Type 'app' and press Enter to see what this object is.
     Out: <Atspi.Accessible object ..>
     ```
-    So now we have a `app` node which is an Atspi root node of the `gnome-terminal` application.
+    So now we have a `app` node which is an `Atspi` root node of the `gnome-terminal` application.
 
     You can notice the application name I have made a query for is `gnome-terminal-server`. You will recall that this is the name we need to provide in the `environment.py` file when defining the application since not every application name is equivalent to the name present in Accessibility tree:
 
@@ -938,7 +938,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     'ipython3']
     ```
 
-    Now let's return to the `app` Atspi node.
+    Now let's return to the `app` `Atspi` node.
 
     You have a root, and you need to find out more about a button. Let's say we have Showing Menubar and want to click on the `File` button.
 
@@ -971,7 +971,9 @@ I have started to develop `qecore` only a few years back, so this project is rel
     Out: False
     ```
 
-    There are many more ways how to get the desired node in the tree. You can see the details for example in https://fedorapeople.org/~vhumpa/dogtail/epydoc/ which is unfortunately not up to date, but I was learning on this, so it is very much usable. For function or methods you cannot find you can look in the project files https://gitlab.com/dogtail/dogtail/.
+    There are many more ways how to get the desired node in the tree. You can see the details for example in [dogtail's documentation](https://fedorapeople.org/~vhumpa/dogtail/epydoc/) which is unfortunately not up to date, but I was learning on this, so it is very much usable.
+
+    For function or methods you cannot find you can look in the project files [dogtail](https://gitlab.com/dogtail/dogtail/).
 
     You can also take the inspiration of the API in the provided `gnome-terminal` project. There should be enough examples of implementation to get you started.
 
@@ -1026,7 +1028,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   We can use the `<Atspi.Accessible object ..>.dump()` method on nodes. This will return very simple tree representation from the node we are in.
 
-  Or you can use the `<Atspi.Accessible object ..>.tree()` method, which returns a proper tree like representation of the application. Let's see how it looks for `gnome-terminal`. Note that the format of the Atspi nodes is as follows `[<name>-<roleName>-<description>]`. Format could be better to prevent confusion in the dash `'-'` character but for now it serves its purpose well.
+  Or you can use the `<Atspi.Accessible object ..>.tree()` method, which returns a proper tree like representation of the application. Let's see how it looks for `gnome-terminal`. Note that the format of the `Atspi` nodes is as follows `[<name>-<roleName>-<description>]`. Format could be better to prevent confusion in the dash `'-'` character but for now it serves its purpose well.
 
   *A little disclaimer. Use with care on large trees like gnome-shell, it will take a very long time, this feature was not written with efficiency in mind. For large trees the dump() method is faster.*
 
@@ -1138,17 +1140,19 @@ I have started to develop `qecore` only a few years back, so this project is rel
   - It contains definition of the `gnome-terminal` component and what arches it will run on and if it can run with Wayland
   - It lists dependencies with beaker task, so we can start appropriate machine setup
   - Defines what HW we are running
-  - Setup and cleanup commands, which are empty in this project. Some setup from runtest.sh could be here, but I am used to having it in the runtest.sh file.
+  - Setup and cleanup commands, which are empty in this project. Some setup from `runtest.sh` could be here, but I am used to having it in the `runtest.sh` file.
   - And finally definition of all tests and how it will be fed to the `runtest.sh`
   - Also marking a few tests as `gate` tests, which is a subset of tests that are run for a new application version as a first indicator of application health
 
   You do not see much else here as it is not needed. But we have a bit more options defined, for example:
   - What directory is the script in
-  - What is the name of this script - it does not have to be named runtest.sh
+  - What is the name of this script - it does not have to be named `runtest.sh`
   - What architectures we can run this test on or which one we exclude
   - What is the timeout of this test so that the machine can kill the execution after that
   - Tagging for some other automation logic - like `gate`
   - What extra packages to install for specific test
+
+  Most of the content is this file is not relevant to this article.
 
 - #### The runtest.sh
 
@@ -1173,13 +1177,15 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
 ## Comparison of OpenQA vs Accessibility
 
-  While OpenQA is a good product for what it does, it is in my opinion not usable for GNOME Desktop Automation and not in the sense that it cannot be used, it can very well be used with some degree of difficulty. I have seen it being used testing anaconda and that is a perfect use case. It would be my choice as well for parts of the system where Atspi cannot be used.
+  While OpenQA is a good product for what it does, it is in my opinion not usable for GNOME Desktop Automation and not in the sense that it cannot be used, it can very well be used with some degree of difficulty. I have seen it being used testing anaconda and that is a perfect use case. It would be my choice as well for parts of the system where `Atspi` cannot be used.
 
-  As I mentioned, we are using the image matching in some capacity as well. From my experience the image matching is very fragile, the tests are difficult to maintain, and it is quite unscalable for our purposes. The few tests that I have written were a pain, and I am the one who introduced this feature to our team, so I can imagine others were even more frustrated with it. We have it in a good enough state today but on any UI change we have to redo the needles. There were instances where I could not differentiate between new and old needle, to my eye it looked exactly the same, but the new needle started passing the test. It is quite a long process to write even a single test.
+  As I mentioned, we are using the image matching in some capacity as well. From my experience the image matching is very fragile, the tests are difficult to maintain, and it is quite unscalable for our purposes. The few tests that I have written were a pain, and I am the one who introduced this feature to our team, so I can imagine others were even more frustrated with it. We have it in a good enough state today but on any UI change we have to redo the `needles`.
 
-  On the other hand with Atspi, if we see a failed test, most of the time it is a bug or the UI label or placement has changed. On bugs the issue is clear and there is nothing to be changed on the automation side. With UI change we check Screenshot or Video to see what happened, and usually we can fix the test very quickly by changing order of clicks or rewriting a string. Once the suite is written, it can be easily expanded with new test cases and maintained through different version releases. There are some issues we encounter when writing the tests that cause instability and that has to be accounted for but once the suite is tried and tested it is very stable.
+  There were instances where I could not differentiate between new and old `needle`, to my eye it looked exactly the same, but the new `needle` started passing the test. It is quite a long process to write even a single test.
 
-  For me personally there is no comparison of the two, but there is no question about difficulty of comparing two images and working with Python objects. Working with objects will always be more stable.
+  On the other hand with `Atspi`, if we see a failed test, most of the time it is a bug or the UI label or placement has changed. On bugs the issue is clear and there is nothing to be changed on the automation side. With UI change we check Screenshot or Video to see what happened, and usually we can fix the test very quickly by changing order of clicks or rewriting a string. Once the suite is written, it can be easily expanded with new test cases and maintained through different version releases. There are some issues we encounter when writing the tests that cause instability and that has to be accounted for but once the suite is tried and tested it is very stable.
+
+  For me personally these tools are way too different to be compared, but there is no question about difficulty of using `opencv` and comparing two images and working with Python objects. Working with objects will always be more stable.
 
 ## Usage with GTK4
 
@@ -1205,7 +1211,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   While I want to present our solution and I can say that what we have is good, it is not perfect by a long shot and requires a lot of knowledge to get the automation running as I have demonstrated in this article, it can also quite quickly stop working.
 
-  All this work that went into making our tool sets is very dependent on Accessibility working, everything depends on and is built around Atspi. If Accessibility went away or would be broken, we would not be able to do as much as we can today. Currently, we can automate most of the GNOME Applications including `gnome-shell` since from the point of view of Accessibility, the `gnome-shell` is just another application.
+  All this work that went into making our tool sets is very dependent on Accessibility working, everything depends on and is built around `Atspi`. If Accessibility went away or would be broken, we would not be able to do as much as we can today. Currently, we can automate most of the GNOME Applications including `gnome-shell` since from the point of view of Accessibility, the `gnome-shell` is just another application.
 
   This article aims to show how 'easy' it is to get the automation of GNOME Applications off the ground. We hope, by providing the full `gnome-terminal` component automation example for anyone, many people will try it out. We would love if people found it useful and would attempt to contribute to upstream projects with automation tests.
 
@@ -1232,7 +1238,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   If accessibility goes away we are going to be "attached to another object by an inclined plane wrapped helically around an axis".
 
-  There are some issues that come from Atspi already, we are able to identify them on our end and can notify developers, but there is an issue. If developer wants to see it reproduced they would need quite a lot of setup and even if the setup is running they see dogtail/qecore errors, we currently have no easy way how to provide reproducers in Atspi that would allow them to see the issue and not waste their time with our environment. The constraint here is time.
+  There are some issues that come from `Atspi` already, we are able to identify them on our end and can notify developers, but there is an issue. If developer wants to see it reproduced they would need quite a lot of setup and even if the setup is running they see `dogtail`/`qecore` errors, we currently have no easy way how to provide reproducers in `Atspi` that would allow them to see the issue and not waste their time with our environment. The constraint here is time.
 
   We have a few issues that we could report and help developers identify and also help to fix it. But the problem is that developers have already a lot of stuff on their hands, our issues are not a priority, understandably. We also do not really have time to make difficult reproducers and debugging issues that we can bypass. We have quite a lot of responsibilities and there is only a finite time. The time we would spend on making reproducers is quite higher that the time we spend on making a workaround.
   Workarounds are doable in matter of minutes, and we bypass the issue altogether.
@@ -1240,19 +1246,19 @@ I have started to develop `qecore` only a few years back, so this project is rel
   So unless there is a blocker, we usually opt to not report issues and work around them.
 
   `Aspirations`:
-  If we introduce automation via accessibility to more people with a coherent project like GNOMEAutomation, that is not collection of projects spliced together to just work, we might have a wider audience and user base. That might help to attract talent to our teams that would help improve Accessibility and keep it in usable state.
+  If we introduce automation via accessibility to more people with a coherent project like GNOMEAutomation, that is not collection of projects spliced together to just work, we might have a wider audience and user base. That might help to attract talent to our teams that would help improve Accessibility and keep it in good state.
 
   With a project like this we also might have a wider base for Fedora testing days. Some things already work on Fedora and are mostly usable. The issue is a long setup as you can see, that this project could hopefully solve. I would imagine that once a test day comes, we could have GitLab/GitHub page with our testing suites that I and others would contribute to, so that anyone can just come, download the project and run the tests. This would be quite rich source of data that user would not have to spend a lot of time on. Simply boot VM, run the suits, report results. There is of course a need for real HW testing as well, but that is not the issue we are trying to solve here. Currently, I try to participate in test days, but I am not able to fit it to my schedule every time, which is a shame.
 
 ### The behave
 
-  Its file structure is the template of our project and all other things that are going before or after the behave command line execution. Behave has limitations that we have to hack around sometimes to get our desired outcome. Those are rare, although we have a recent example.
+  Its file structure is the template of our project and all other things are going before or after the `behave` command line execution. `Behave` has limitations that we have to hack around sometimes to get our desired outcome. Those are rare, although we have a recent example.
 
-  We need to generate a log no matter what part fails, so that the end user can evaluate what went wrong. The problem starts when the very first function is called, `before_all`. Something can still go wrong, and we need to attach the data to the report. The problem is that behave, even if it was called as `behave -f html-pretty`, "does not know" about the formatter in the `before_all` function. So when we are dealing with an error in setup, we have no place to attach it to. We can bypass it by saving the error and evaluate any errors in the very next function `before_scenario`, end the run, and attach it to the report since behave now knows it has a formatter defined. This is solvable but quite inconvenient.
+  We need to generate a log no matter what part fails, so that the end user can evaluate what went wrong. The problem starts when the very first function is called, `before_all`. Something can still go wrong, and we need to attach the data to the report. The problem is that `behave`, even if it was called as `behave -f html-pretty`, "does not know" about the formatter in the `before_all` function. So when we are dealing with an error in setup, we have no place to attach it to. We can bypass it by saving the error and evaluate any errors in the very next function `before_scenario`, end the run, and attach it to the report since `behave` now knows it has a formatter defined. This is solvable but quite inconvenient.
 
-  There are rare issues where the behave fails, and no logs are generated while we would love at least partial results. But since behave is the one who generates the output, if behave fails we have nothing to parse for our `html-pretty` output. Sometimes behave also captures errors, and we have to go for an adventure to see where the error was coming from since the error we get said nothing about the real issue. There are no blockers currently, just inconveniences that we would love not to deal with.
+  There are rare issues where the `behave` fails, and no logs are generated while we would love at least partial results. But since `behave` is the one who generates the output, if `behave` fails we have nothing to parse for our `html-pretty` output. Sometimes `behave` also captures errors, and we have to go for an adventure to see where the error was coming from since the error we get said nothing about the real issue. There are no blockers currently, just inconveniences that we would love not to deal with.
 
-  `Aspiration` is to not have behave dictate our structure, possibilities and output but having project that enables our wants/needs/requirements. But again, behave works perfectly fine in the majority of our cases - no reason to reimplement something that exists with small changes. There is currently no proper reason to remove behave from our solution.
+  `Aspiration` is to not have `behave` dictate our structure, possibilities and output but having project that enables our wants/needs/requirements. But again, `behave` works perfectly fine in the majority of our cases - no reason to reimplement something that exists with small changes. There is currently no proper reason to remove `behave` from our solution.
 
 ### The dogtail API
 
