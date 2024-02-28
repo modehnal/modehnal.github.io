@@ -868,7 +868,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     This means your decorator line somewhere in your `.feature` files is not being correctly matched to its implementation in your `step.py` file. Add the `undefined` decorator to the steps.py file as hinted.
 
 
-  - ### **SearchError: descendant of [application | gnome-terminal-server]: child with name=<not_existing_name>**
+  - ### **SearchError: descendant of [application | gnome-terminal-server]: child with name=not_existing_name**
 
     You have tried search or do an action for a widget that is not present in the `gnome-terminal` Accessibility tree. Make sure the search query uses correct data.
 
