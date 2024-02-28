@@ -258,7 +258,6 @@ To use finer execution of a few tests from a larger set, you can execute the `be
 Note that instead of `Given`, `When`, `Then`, `And` and `But` we can use asterisk `*` to prefix all `steps` in `feature` files. We use asterisk in most cases.
 
 ```gherkin
-
 @dummy_feature
 Feature: Dummy Feature
 
