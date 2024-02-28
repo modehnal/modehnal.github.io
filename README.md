@@ -90,8 +90,27 @@ Here you can see a very minimal example of how we interact with applications, pr
     app = root.application("gnome-terminal-server") # Save root object.
 
     # Search the application tree for objects.
-    app.child("File", "menu").click() # Find menu and click.
-    app.child("New Tab", "menu item").click() # Find menu item and click.
+    app.child("Terminal", "terminal").click(3) # Right click in the middle of the terminal.
+
+    sleep(1) # Give application a little time to open the menu.
+
+    # Find the item Show Menubar, that is showing on the screen.
+    show_menubar = app.findChild(
+        lambda x: x.name == "Show Menubar"
+        and x.roleName == "check menu item"
+        and x.showing
+    )
+    # If the Show Menubar is not checked, click it.
+    if not show_menubar.checked:
+        show_menubar.click()
+    else:
+        pressKey("Esc")
+
+    sleep(1) # Give application a little time to close the menu.
+
+    app.child("File", "menu").click() # Find File menu and click.
+    app.child("New Tab", "menu").click() # Find New Tab menu and click.
+    app.findChild(lambda x: "1." in x.name).click() # Confirm the profile.
 
     sleep(1) # Give terminal a little time to open the New Tab.
 
