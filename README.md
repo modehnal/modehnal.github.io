@@ -634,7 +634,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
 - #### Set up the Virtual Machine
 
-  You can get a Fedora 38 ISO here https://download.fedoraproject.org/pub/fedora/linux/releases/38/Workstation/x86_64/iso/
+  First let's get [Fedora 38 ISO](https://download.fedoraproject.org/pub/fedora/linux/releases/38/Workstation/x86_64/iso/)
 
   Boot the Fedora ISO with your choice of virtualization tool (e.g. Virtual Machine Manager or Boxes), install it to the disk and find out the IP.
 
