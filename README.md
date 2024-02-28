@@ -507,7 +507,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
       - Capturing the image on fail
       - Stopping the video recording
       - Cleanup, closing all started applications
-      - Injecting data to the `behave-html-pretty-formatter`. Some of these things are *on-fail-only*, but that can be changed in `sandbox`:
+      - Injecting data to the `behave-html-pretty-formatter`. Some of these are *on-fail-only*, but that can be changed in `sandbox`:
         - Attach screenshot
         - Attach journal from the suite run
         - Attach backtrace from coredump
@@ -515,7 +515,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
         - Attach abrt/FAF links
         - Attach debug logs
 
-    You can see full functioning `environment.py` example bellow.
+    You can see full `environment.py` example bellow.
 
   - #### To summarize all what the user needs to do for setup
 
@@ -531,11 +531,11 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     In previous examples from `behave` usage, you saw that you can implement a function in python. Connect it with `behave` decorator `@step` to the text in `.feature` file.
 
-    Over the years we have had many step implementations and usage from features. Most of the time if I wanted to do something I had to code a Python function, mark it with a decorator and use that decorator in the feature. Some of them were used in so many projects, I found myself reimplementing or copying the same step over and over. So I decided to provide them to everyone and all they have to do is to keep the format so that the behave can match them.
+    Over the years we have had many step implementations and usage from features. Most of the time if I wanted to do something I had to code a Python function, mark it with a decorator and use that decorator in the feature. Some of them were used in so many projects, I found myself reimplementing or copying the same step over and over. So I decided to provide them to everyone and all they have to do is to keep the format so that the `behave` can match them.
 
-    This is the file where you can see commonly used steps https://gitlab.com/dogtail/qecore/-/blob/master/qecore/common_steps.py
+    The `qecore` project location where you can see [commonly used steps](https://gitlab.com/dogtail/qecore/-/blob/master/qecore/common_steps.py)
 
-    With `common_steps.py` from qecore, all user has to do is the following:
+    With `common_steps.py` from `qecore`, all user has to do is the following:
 
     ```python
     # -- FILE: features/steps/steps.py
@@ -603,7 +603,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     The qecore project provides truly a lot for our day-to-day use. I cannot list and talk about everything as this article is already very long and more is to come. I would still like to list a few other features:
 
     - **Flatpaks** - just as we are able to load applications with `get_application` we also have a function to work with Flatpaks `get_flatpak`.
-    - **Backtrace** - once there is an issue with the core component we are testing and a coredump is detected via `coredumpctl`, qecore will attempt to get backtrace from `gdb` after installing all available debuginfo and debugsource packages that the `gdb` will say it needs. This needs to be toggled on as it takes quite a lot of time and space. You will see the resulting backtrace attached in example report. **backtrace_from_coredump_zenity_example.html**.
+    - **Backtrace** - once there is an issue with the core component (in this project it is `gnome-terminal`) we are testing and a coredump is detected via `coredumpctl`, `qecore` will attempt to get backtrace from `gdb` after installing all available debuginfo and debugsource packages that the `gdb` will say it needs. This needs to be toggled on as it takes quite a lot of time and space. The resulting backtrace is than attached to the report - [Backtrace from coredump Example](https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html).
     - **Logging** - we have a continuous logging of qecore and what it does. Once any test fails, its logging data are attached to the HTML report to make sure qecore did not cause the mistake. We also can make sure the qecore is working as intended at all times. This logging can be also directed to the console, so user will be able to see it in real time. You can try it in the provided project with `$ LOGGING=true behave -kt start_via_command`
     - **Image matching** - from time to time there is a use case, where the accessibility is not working correctly, or the accessibility data is not there at all. For these situations we cannot do much, but we took an inspiration from OpenQA. In such cases we can identify widget and parts of the desktop simply with an image (`needle`) and try to find that image in the screenshot we take. These functions will return coordinates to us, and we can click to the correct place. The qecore has an image matching section that can be imported and used. It also provides pre-coded steps that are used most of the time. For the times you need to adjust the execution, we provide the `Matcher` class and its methods, so that you can build your custom functionality easily. For exact implementation and usage you can look here https://gitlab.com/dogtail/qecore/-/blob/master/qecore/image_matching.py
 
