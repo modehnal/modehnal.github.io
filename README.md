@@ -216,7 +216,7 @@ The steps.py file contents are as follows:
         pass
 ```
 
-To better visualize the structure of `.feature` files. Single `Feature` file can contain multiple `Scenarios` and each `Scenario` contains `Steps` that are implemented in `steps.py` file that is located in `steps` directory:
+To better visualize the structure of `behave's` `.feature` files. Single `Feature` file can contain multiple `Scenarios` and each `Scenario` contains `Steps` that are implemented in `steps.py` file that is located in `steps` directory:
 
     ┌───────────────────────────────────────────────────────────────────────────────────┐
     │         ┌────────────────────────────────┐ ┌────────────────────────────────┐     │
@@ -462,7 +462,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - #### Before Scenario
 
-    Now for the `before_scenario` function that gets executed before each test, this is where most of the work will be done by `qecore's` `sandbox`. But all the user needs to do is to call this method and that is all. Nothing more, nothing less.
+    Now for the `behave's` `before_scenario` function that gets executed before each test, this is where most of the work will be done by `qecore's` `sandbox`. But all the user needs to do is to call this method and that is all. Nothing more, nothing less.
 
 
     ```python
@@ -492,7 +492,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - #### After Scenario
 
-    The `behave`'s `after_scenario` function works the same as the name implies. This method will get executed after every test. As with previous example, all the user needs to do is to call the single method and the job is done.
+    The `behave's` `after_scenario` function works the same as the name implies. This method will get executed after every test. As with previous example, all the user needs to do is to call the single method and the job is done.
 
     ```python
     def after_scenario(context, scenario) -> None:
