@@ -541,20 +541,17 @@ I have started to develop `qecore` only a few years back, so this project is rel
     from qecore.common_steps import *
     ```
 
-    In following example, apart from one step `Terminal contains...`, I did not have to implement all other steps, and I was able to successfully write and execute a test:
+    In following example, I did not have to implement any steps, and I was able to successfully write and execute a test:
 
-    ```programming
-    @copy_and_paste
-    Scenario: Copy and paste from terminal to another terminal.
-      * Start application "terminal" via "command"
-      * Type text: "test string"
-      * Left click "Edit" "menu" in "terminal"
-      * Left click "Select All" "menu item" in "terminal"
-      * Key combo: "<Shift><Ctrl><C>"
-      * Key combo: "<Shift><Ctrl><N>"
-      * Wait 1 second before action
-      * Key combo: "<Shift><Ctrl><V>"
-      * Terminal contains string "test string"
+    ```gherkin
+    @view_menu_show_menubar
+    Scenario: View Menu Show Menubar
+      * Left click "View" "menu" in "terminal"
+      * Left click "Show Menubar" "check menu item" in "terminal"
+      * Item "File" "menu" is not "showing" in "terminal"
+      * Right click "Terminal" "terminal" in "terminal"
+      * Left click "Show Menubar" "check menu item" in "terminal"
+      * Item "File" "menu" is "showing" in "terminal"
     ```
 
     Apart from providing generic steps that can be used in every project, the intention was to also have a way for non-technical person to write English sentences and thus being able to write automated tests. It is not perfect and cannot be used for all cases generally, as there are situations where I just have to write a custom step, but even an inexperienced user should be able to write a very simple test without an extensive Python knowledge or even the project as a whole.
