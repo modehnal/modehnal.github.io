@@ -51,13 +51,13 @@ First, let's go over individual parts of our automation stack that we use.
 
 We use Assistive Technology - Service Provider Interface (AT-SPI) which is a set of interfaces that allow access technologies, such as screen readers, to programmatically determine what is being displayed on the screen and simulate keyboard and mouse events. It can be also used for automated testing.
 
-To do this, we utilize Python module GObject introspection that holds Python bindings and support for GTK toolkit and GNOME applications, namely Atspi module.
+To do this, we utilize Python module GObject introspection that holds Python bindings and support for GTK toolkit and GNOME applications, namely `Atspi` module.
 
   ```python
   from gi.repository import Atspi
   ```
 
-We are using the dogtail project as an API for all we do. The reality of things is that the dogtail is a wrapper over Atspi and pyatspi2 (which is a wrapper over Atspi itself). There are some parts that are implemented only in dogtail project for ease of use, but if we take out dogtail and pyatspi2, everything can work only with Atspi module with some modifications.
+We are using the `dogtail` project as an API for all we do. The reality of things is that the `dogtail` is a wrapper over `Atspi` and pyatspi2 (which is a wrapper over `Atspi` itself). There are some parts that are implemented only in `dogtail` project for ease of use, but if we take out `dogtail` and pyatspi2, everything can work only with `Atspi` module with some modifications.
 
 ```
     ┌──────────────────────────────────┐
@@ -128,7 +128,7 @@ While the example provided above will work for Xorg. For Wayland there is an ext
 
 With Wayland, there is no translation of window coordinates to desktop coordinates. Meaning that if we have a button in the top left corner of the application and the application is in the middle of the screen, the click itself will be translated to the top left corner of the screen and not into the application window. Therefore, missing the click and failing the step.
 
-Fortunately we have a solution in the form of a `gnome-ponytail-daemon`. This project was written by Olivier Fourdan `@ofourdan` and was based on gnome-remote-desktop written by Jonas Adahl `@jadahl`. I would also like to mention a new developer that recently joined our team José Expósito `@jexposit` who already contributed to the `gnome-ponytail-daemon` project. Changes are communicated to us after which we can verify the function with our suites. Since we depend on ponytail for translation of coordinates, any issue will show quickly.
+Fortunately we have a solution in the form of a `gnome-ponytail-daemon`. This project was written by Olivier Fourdan `@ofourdan` and was based on gnome-remote-desktop written by Jonas Adahl `@jadahl`. I would also like to mention a new developer that recently joined our team José Expósito `@jexposit` who already contributed to the `gnome-ponytail-daemon` project. Changes are communicated to us after which we can verify the function with our suites. Since we depend on `gnome-ponytail-daemon` for translation of coordinates, any issue will show quickly.
 
 With GNOME on Wayland we have screencasts and remote desktop APIs that can be used for controlling the keyboard and cursor. Wayland does not expose desktop coordinates and the usual process will return window coordinates of the various application widgets, which is where the `RecordWindow` method from screencast can be used, as it will translate global coordinates into surface relative coordinates.
 
@@ -216,7 +216,7 @@ The steps.py file contents are as follows:
         pass
 ```
 
-To better visualize the structure of the `behave`'s `.feature` files. Single `Feature` file can contain multiple `Scenarios` and each `Scenario` contains `Steps` that are implemented in `steps.py` file that is located in `steps` directory:
+To better visualize the structure of `.feature` files. Single `Feature` file can contain multiple `Scenarios` and each `Scenario` contains `Steps` that are implemented in `steps.py` file that is located in `steps` directory:
 
     ┌───────────────────────────────────────────────────────────────────────────────────┐
     │         ┌────────────────────────────────┐ ┌────────────────────────────────┐     │
@@ -462,7 +462,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - #### Before Scenario
 
-    Now for the `behave`'s `before_scenario` function that gets executed before each test, this is where most of the work will be done by `qecore`'s `sandbox`. But all the user needs to do is to call this method and that is all. Nothing more, nothing less.
+    Now for the `before_scenario` function that gets executed before each test, this is where most of the work will be done by `qecore's` `sandbox`. But all the user needs to do is to call this method and that is all. Nothing more, nothing less.
 
 
     ```python
