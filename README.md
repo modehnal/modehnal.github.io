@@ -543,23 +543,23 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     In following example, apart from one step `Terminal contains...`, I did not have to implement all other steps, and I was able to successfully write and execute a test:
 
-    ```console
-    @copy_and_paste
-    Scenario: Copy and paste from terminal to another terminal.
-      * Start application "terminal" via "command"
-      * Type text: "test string"
-      * Left click "Edit" "menu" in "terminal"
-      * Left click "Select All" "menu item" in "terminal"
-      * Key combo: "<Shift><Ctrl><C>"
-      * Key combo: "<Shift><Ctrl><N>"
-      * Wait 1 second before action
-      * Key combo: "<Shift><Ctrl><V>"
-      * Terminal contains string "test string"
+    ```gherkin
+      @copy_and_paste
+      Scenario: Copy and paste from terminal to another terminal.
+        * Start application "terminal" via "command"
+        * Type text: "test string"
+        * Left click "Edit" "menu" in "terminal"
+        * Left click "Select All" "menu item" in "terminal"
+        * Key combo: "<Shift><Ctrl><C>"
+        * Key combo: "<Shift><Ctrl><N>"
+        * Wait 1 second before action
+        * Key combo: "<Shift><Ctrl><V>"
+        * Terminal contains string "test string"
     ```
 
     Apart from providing generic steps that can be used in every project, the intention was to also have a way for non-technical person to write English sentences and thus being able to write automated tests. It is not perfect and cannot be used for all cases generally, as there are situations where I just have to write a custom step, but even an inexperienced user should be able to write a very simple test without an extensive Python knowledge or even the project as a whole.
 
-    #### Common steps also come with the advantage of debugging on error
+  - #### Common steps also come with the advantage of debugging on error
 
     Let's say the user is writing a test and makes a typo or uses a name or a role name of a widget incorrectly. There are quite a lot of ways how to debug such an issue. The most convenient one is not debugging at all and letting `qecore` do it for us:
 
