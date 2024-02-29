@@ -1215,14 +1215,14 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   All this work that went into making our tool sets is very dependent on Accessibility working, everything depends on and is built around `Atspi`. If Accessibility went away or would be broken, we would not be able to do as much as we can today. Currently, we can automate most of the GNOME Applications including `gnome-shell` since from the point of view of Accessibility, the `gnome-shell` is just another application.
 
-  This article aims to show how *easy* it is to get the automation of GNOME Applications off the ground. We hope, by providing the full `gnome-terminal` component automation example for anyone, many people will try it out. We would love if people found it useful and would attempt to contribute to upstream projects with automation tests.
+  This article aims to show how *easy* it is to get the automation of GNOME Applications off the ground. We hope, by providing the full `gnome-terminal` component automation example for anyone, a lot of people will try it out. We would love if people found it useful and would attempt to contribute to upstream projects with automation tests.
 
   The most desired outcome would be to have more eyes on Accessibility. To provide justification and motivation for development of Accessibility and its ability to be used for automation.
 
 
 ## Future Plans/Aspirations -> GNOMEAutomation
 
-  To be honest, there is no need to do any of the following things that I am listing. Currently, it works perfectly fine as is. But it can be better, it can work better, there is always a way to improve what we have.
+  To be honest, there is no need to do any of the following things that I am listing. Currently, it works good enough as is. But it can be better, it can work better, there is always a way to improve what we have.
 
 
 ### Qecore
@@ -1232,7 +1232,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
   - `behave` - relying on its environment to start its main functions and contextual information holder that moves data across different parts
   - `dogtail` - provides useful functions like search queries, clicking and key pressing
   - `gnome-ponytail-daemon` - on Wayland this is a key project without which we cannot do much
-  - `behave-html-pretty-formatter` - standalone project that qecore will populate with data upon failure
+  - `behave-html-pretty-formatter` - standalone project that `qecore` will populate with data upon failure
 
   `Aspirations` is to have a single project that covers everything that quality engineers need -> `GNOMEAutomation`.
 
@@ -1250,7 +1250,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
   `Aspirations`:
   If we introduce automation via accessibility to more people with a coherent project like GNOMEAutomation, that is not collection of projects spliced together to just work, we might have a wider audience and user base. That might help to attract talent to our teams that would help improve Accessibility and keep it in good state.
 
-  With a project like this we also might have a wider base for `Fedora testing days`. Some things already work on Fedora and are mostly usable. The issue is a long setup as you can see, that this project would hopefully solve. I would imagine that once a test day comes, we could have GitLab/GitHub page with our testing suites that I and others would contribute to, so that anyone can just come, download the project and run the tests. This would be quite rich source of data that user would not have to spend a lot of time on. Simply boot VM, run the suits, report results. There is of course a need for real HW testing as well, but that is not the issue we are trying to solve here. Currently, I try to participate in test days, but I am not able to fit it to my schedule every time, which is a shame.
+  With a project like this we also might have a wider base for `Fedora testing days`. Some things already work on Fedora and are mostly usable. The issue is a long setup as you can see, that this project would hopefully solve. I would imagine that once a test day comes, we could have GitLab/GitHub repositories with our testing suites that I and others would contribute to, so that anyone can just come, download the project and run the tests. This would be quite rich source of data that user would not have to spend a lot of time on. Simply boot VM, run the suits, report results. There is of course a need for real HW testing as well, but that is not the issue we are trying to solve here. Currently, I try to participate in test days, but I am not able to fit it to my schedule every time, which is a shame.
 
 ### The behave
 
@@ -1260,7 +1260,9 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   There are rare issues where the `behave` fails, and no logs are generated while we would love at least partial results. But since `behave` is the one who generates the output, if `behave` fails we have nothing to parse for our `html-pretty` output. Sometimes `behave` also captures errors, and we have to go for an adventure to see where the error was coming from since the error we get said nothing about the real issue. There are no blockers currently, just inconveniences that we would love not to deal with.
 
-  `Aspiration` is to not have `behave` dictate our structure, possibilities and output but having project that enables our wants/needs/requirements. But again, `behave` works perfectly fine in the majority of our cases - no reason to reimplement something that exists with small changes. There is currently no proper reason to remove `behave` from our solution.
+  `Aspiration` is to not have `behave` dictate our structure, possibilities and output but having project that enables our wants/needs/requirements. But again, `behave` works perfectly fine in the majority of our cases - no reason to reimplement something that exists with small changes.
+
+  There is currently no proper reason to remove `behave` from our solution.
 
 ### The dogtail API
 
