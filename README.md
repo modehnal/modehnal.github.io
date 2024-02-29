@@ -230,18 +230,17 @@ To better visualize the structure of `behave's` `.feature` files. Single `Featur
 Now we can run `behave`:
 
 ```console
+$ behave
+Feature: Showing off behave # features/example.feature:2
 
-    $ behave
-    Feature: Showing off behave # features/example.feature:2
+  Scenario: Run a simple test          # features/example.feature:5
+    Given we have behave installed     # features/steps/example_steps.py:4
+    When we implement 5 tests          # features/steps/example_steps.py:8
+    Then behave will test them for us! # features/steps/example_steps.py:13
 
-      Scenario: Run a simple test          # features/example.feature:5
-        Given we have behave installed     # features/steps/example_steps.py:4
-        When we implement 5 tests          # features/steps/example_steps.py:8
-        Then behave will test them for us! # features/steps/example_steps.py:13
-
-    1 feature passed, 0 failed, 0 skipped
-    1 scenario passed, 0 failed, 0 skipped
-    3 steps passed, 0 failed, 0 skipped, 0 undefined
+1 feature passed, 0 failed, 0 skipped
+1 scenario passed, 0 failed, 0 skipped
+3 steps passed, 0 failed, 0 skipped, 0 undefined
 ```
 The `behave` run was a success, now we can use `behave` to run all of our test cases with ease.
 
