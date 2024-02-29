@@ -1288,7 +1288,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
 ### The behave-html-pretty-formatter
 
-  I made a proof of concept of the formatter and our team improved upon the concept which became our new formatter. The formatter was required to be written in a way to fit in our current solution. It had to be done as a standalone project. Which on its own is just bare bones so that it also can be used by upstream (we were pleasantly surprised how many people are using it already). We are still generating the data with qecore.
+  The formatter was required to be written in a way to fit in our current solution. It had to be done as a standalone project. Which on its own is just bare bones so that it also can be used by upstream (we were pleasantly surprised how many people are using it already). We are still generating the data with `qecore`.
 
   Projects like `GNOMEAutomation` would include an output generator which `behave-html-pretty-formatter` would fulfil beautifully or with some minor changes. I always imagined that we could have a self-contained suite output wrapped over the entire stack, which is currently not feasible. That said, having it over the `behave` part is good enough.
 
