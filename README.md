@@ -71,51 +71,51 @@ We are using the `dogtail` project as an API for all we do. The reality of thing
 Below you can see a simple example of how we interact with applications, provided you have a running session and the accessibility toolkit is enabled. This example will open overview, start gnome-terminal and execute a command:
 
 ```python
-    #!/usr/bin/python3
-    from dogtail.tree import root
-    from dogtail.rawinput import typeText, pressKey
-    from time import sleep
+#!/usr/bin/python3
+from dogtail.tree import root
+from dogtail.rawinput import typeText, pressKey
+from time import sleep
 
-    # First open the application.
-    pressKey("Super") # Open overview.
-    sleep(1) # Give overview a little time to show.
+# First open the application.
+pressKey("Super") # Open overview.
+sleep(1) # Give overview a little time to show.
 
-    typeText("Terminal") # Search application.
-    pressKey("Enter") # Confirm by Enter.
+typeText("Terminal") # Search application.
+pressKey("Enter") # Confirm by Enter.
 
-    sleep(1) # Give application a little time to start.
+sleep(1) # Give application a little time to start.
 
-    # Load application root to variable.
-    app = root.application("gnome-terminal-server") # Save root object.
+# Load application root to variable.
+app = root.application("gnome-terminal-server") # Save root object.
 
-    # Search the application tree for objects.
-    app.child("Terminal", "terminal").click(3) # Right click in the middle of the terminal.
+# Search the application tree for objects.
+app.child("Terminal", "terminal").click(3) # Right click in the middle of the terminal.
 
-    sleep(1) # Give application a little time to open the menu.
+sleep(1) # Give application a little time to open the menu.
 
-    # Find the item Show Menubar, that is showing on the screen.
-    show_menubar = app.findChild(
-        lambda x: x.name == "Show Menubar"
-        and x.roleName == "check menu item"
-        and x.showing
-    )
-    # If the Show Menubar is not checked, click it.
-    if not show_menubar.checked:
-        show_menubar.click()
-    else:
-        pressKey("Esc")
+# Find the item Show Menubar, that is showing on the screen.
+show_menubar = app.findChild(
+    lambda x: x.name == "Show Menubar"
+    and x.roleName == "check menu item"
+    and x.showing
+)
+# If the Show Menubar is not checked, click it.
+if not show_menubar.checked:
+    show_menubar.click()
+else:
+    pressKey("Esc")
 
-    sleep(1) # Give application a little time to close the menu.
+sleep(1) # Give application a little time to close the menu.
 
-    app.child("File", "menu").click() # Find File menu and click.
-    app.child("New Tab", "menu").click() # Find New Tab menu and click.
-    app.findChild(lambda x: "1." in x.name).click() # Confirm the profile.
+app.child("File", "menu").click() # Find File menu and click.
+app.child("New Tab", "menu").click() # Find New Tab menu and click.
+app.findChild(lambda x: "1." in x.name).click() # Confirm the profile.
 
-    sleep(1) # Give terminal a little time to open the New Tab.
+sleep(1) # Give terminal a little time to open the New Tab.
 
-    # Execute command.
-    typeText("echo Hello World") # Type command to terminal.
-    pressKey("Enter") # Confirm command.
+# Execute command.
+typeText("echo Hello World") # Type command to terminal.
+pressKey("Enter") # Confirm command.
 ```
 
 With these basic queries we can do quite a lot.
@@ -245,11 +245,11 @@ The `behave` run was a success, now we can use `behave` to run all of our test c
 
 For all of our test cases, we are using `tags` to differentiate between different scenarios.
 
-So while `$ behave` will start every single scenario defined in feature files, our best practice is to start test cases one by one and separate them into their own result pages, which I will get into later.
+So while `$ behave` will start every single scenario defined in `feature` files, our best practice is to start test cases one by one and separate them into their own result pages, which I will get into later.
 
 We are running `behave` like this `$ behave -kt showing_off_behave`. The `-k` (note that in development version of behave `v1.2.7.dev#` this is available as `--no-skipped`, in the current pypi version 1.2.6 `-k` is still working) will skip all unexecuted tests, so they are not printed in summary and `-t` will match the `tag` in `feature` file and will start that one specific `scenario`. One `tag` can be used any number of times, so we can mark the whole `scenario` with one `tag` and start the execution that will run multiple tests.
 
-For the example bellow, we can start specific test by `$ behave -kt dummy_1` or run them both as `$ behave -kt dummy`. Of course if we have only those 2, the equivalent command is `$ behave`. If there are many more tests, we do not want to duplicate the tag too many times, therefore we can tag the entire feature file and start all scenarios in given feature file as `$ behave -kt dummy_feature`.
+For the example bellow, we can start specific test by `$ behave -kt dummy_1` or run them both as `$ behave -kt dummy`. Of course if we have only those 2, the equivalent command is `$ behave`. If there are many more tests, we do not want to duplicate the `tag` too many times, therefore we can `tag` the entire feature file and start all `scenarios` in given `feature` file as `$ behave -kt dummy_feature`.
 
 To use finer execution of a few tests from a larger set, you can execute the `behave` with a list of tags `$ behave -k --tags="dummy_1,dummy_2"`.
 
@@ -313,7 +313,7 @@ This is the `behave.ini` file you will see in the `gnome-terminal` automation ex
 
 That run will be now executed as `$ behave -kt dummy -f html-pretty -o test.html`. This will change the formatter from the default `pretty` to the `html-pretty` that will take the data from `behave`, transform them and generate self-contained HTML page to the output file `test.html`. Our test result files are named after the test case that was executed but omitted here for simplicity.
 
-We made the new formatter `html-pretty` less than a year ago (January 2023) to improve the old `html` formatter. The new `html-pretty` formatter is coded in a very different way and can be more easily enriched with new features. It is also, in our opinion, much cleaner and simpler, while allowing us to have more data available to us. Output of this project allows us to have a self-contained HTML page so that the test results are always in this single file with CSS and JS. The page contains a lot of information. It prints each step and provides data if something goes wrong.
+We made the new formatter `html-pretty` quite recently (January 2023) to improve the older `html` formatter. The new `html-pretty` formatter is coded in a very different way and can be more easily enriched with new features. It is also, in our opinion, much cleaner and simpler, while allowing us to have more data available to us. Output of this project allows us to have a self-contained HTML page so that the test results are always in this single file with CSS and JS. The page contains a lot of information. It prints each step and provides data if something goes wrong.
 
 Although the formatter supports quite a lot of use cases e.g. compression of data, clickable links, images, videos and text logs, the data has to be somehow generated and injected into the formatter. The `how` is going to be addressed in the next section.
 
@@ -345,18 +345,22 @@ I have started to develop `qecore` only a few years back, so this project is rel
     The `qecore-headless` script provides much more than that though:
     - Enables accessibility toolkit
     - It changes GDM custom.conf configuration to autologin `test` user without password so that the GDM login page is not in the way
-    - It loads the environment variables from process `gnome-session-binary`. More specifically we look in the `/proc/<pid>/environ` take all values, add our own, and inject them to the os.environ of the `behave` so that our tests act as if they are running from the session itself. With this we can `fool` the system most of the time but there are cases where it is not enough, although the workarounds are simple.
-    - It configures user session in sense that you can choose if you would like to start Xorg `qecore-headless --session-type xorg` or Wayland `qecore-headless --session-type wayland`
-    - It is able to configure user desktop, namely GNOME `qecore-headless --session-desktop gnome` and GNOME Classic `qecore-headless --session-desktop gnome-classic`
+    - It loads the environment variables from process `gnome-session-binary`. More specifically we look in the `/proc/<pid>/environ` take all values, add our own, and inject them to the `os.environ` of the `behave` so that our tests act as if they are running from the session itself. With this we can *fool* the system most of the time but there are cases where it is not enough, although the workarounds are simple.
+    - It configures user session in sense that you can choose if you would like to start Xorg or Wayland:
+      - `qecore-headless --session-type xorg`
+      - `qecore-headless --session-type wayland`
+    - It is able to configure user desktop, namely GNOME or GNOME Classic
+      - `qecore-headless --session-desktop gnome`
+      - `qecore-headless --session-desktop gnome-classic`
     - It makes sure the restart is done cleanly by checking `logind`
     - It sets up other configuration to allow you to figure out system issues, like issue of `accessibility toolkit` turning off
     - It will adapt `gsettings` values which we use most of the time and can sometime be annoying to deal with by hand
-    - It does extensive troubleshooting when the GDM start fails ([The qecore-headless troubleshooting](https://modehnal.github.io/data/headless_colour_troubleshooting.png)) In the example you will not see anything wrong, I forced the error by stopping the gdm before the end of the setup.
+    - It does extensive troubleshooting when the GDM start fails ([The qecore-headless troubleshooting](https://modehnal.github.io/data/headless_colour_troubleshooting.png)) In the example you will not see anything wrong, I forced the error by stopping the GDM before the verification section got executed.
     - It can enforce session type, meaning it will check the system configuration and running session and will fail on mismatch
     - It provides `--keep <int>` parameter, enabling to use one session for multiple tests. For example `qecore-headless --keep 5 "behave -kt <test_name>"` will make sure it runs 5 tests before restarting the session.
     - I am testing this script on RHEL8/9, Fedoras from version 35 to rawhide and on multiple architectures namely x86_64, ppc64le, aarch64 and s390x. It works on these architectures and systems out of the box.
 
-    All in all, this is a base script we run before we start to do anything. The `qecore-headless` is a script that executes another script. In the example above it started `behave -kt <test_name>`. If it does not get any parameter the `bash` is the default script. Which is what we want on our machines where we test by hand. We start the script and after that we only work with behave. While from time to time restarting the session simply by `Ctrl+D` or `exit` and starting new `qecore-headless`. Very convenient and easy to use.
+    All in all, this is a base script we run before we start to do anything. The `qecore-headless` is a script that executes another script. In the line above it started `behave -kt <test_name>`. If it does not get any parameter the `bash` is the default script. Which is what we want on our machines where we test by hand. We start the script and after that we only work with behave. While from time to time restarting the session simply by `Ctrl+D` or `exit` and starting new `qecore-headless`. Very convenient and easy to use.
 
     ```console
       [test@localhost]$ qecore-headless
