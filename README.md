@@ -8,7 +8,7 @@
   - [Giving the API a structure to be used in automation - **behave**](#giving-the-api-a-structure-to-be-used-in-automation---behave)
   - [The automation suite result page in form of **behave-html-pretty-formatter** project](#the-automation-suite-result-page-in-form-of-behave-html-pretty-formatter-project)
   - [Filling all the gaps and providing useful tools with the **qecore** project](#filling-all-the-gaps-and-providing-useful-tools-with-the-qecore-project)
-- [Full project example](#full-project-example)
+- [GNOME Terminal Full Project Example](#gnome-terminal-full-project-example)
   - [Basic machine setup required before any action](#basic-machine-setup-required-before-any-action)
   - [Installing, building and execution](#installing-building-and-execution)
   - [Errors you can encounter](#errors-you-can-encounter)
@@ -141,7 +141,7 @@ If there would be a need for a very specific test case, the `dogtail` and `ponyt
 With enough knowledge about the system and how these APIs work, a lot of things can be done even if they are not provided as methods and functions.
 We have years of experience in this. Accessibility is not always in the state we would like it to be in, but we can work around issues most of the time.
 
-I will show how to build and use ponytail in the `Full project example` section.
+I will show how to build and use ponytail in the `GNOME Terminal Full Project Example` section.
 
 The ponytail project repository is located here [gnome-ponytail-daemon](https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon)
 
@@ -508,7 +508,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
       - Capturing the image on fail
       - Stopping the video recording
       - Cleanup, closing all started applications
-      - Injecting data to the `behave-html-pretty-formatter`. Some of these are *on-fail-only*, but that can be changed in `sandbox`:
+      - Injecting data to the `behave-html-pretty-formatter`. Some of these are *on-fail-only*, but that can be changed in `sandbox` after the initialization in `before_all`:
         - `context.sandbox.attach_faf_on_pass = True`
         - `context.sandbox.attach_video_on_pass = True`
         - `context.sandbox.attach_journal_on_pass = True`
@@ -523,14 +523,14 @@ I have started to develop `qecore` only a few years back, so this project is rel
     - `context.sandbox.before_scenario(context, scenario)`
     - `context.sandbox.after_scenario(context, scenario)`
 
-    Now your setup is done "forever". These are the setup parts and once this is done for a project, it rarely changes. Setup for some of my components, that I am responsible for, did not change for years that I was working on them. There are situations in my suites where I have no defined application, so all I need for setup are just 3 lines.
+    Now your setup is done *forever*. These are the setup parts and once this is done for a project, it rarely changes. Setup for some of my components, that I am responsible for, did not change for years that I was working on them. There are situations in my suites where I have no defined application, so all I need for setup are just 3 lines.
 
 
   - #### Commonly used steps
 
     In previous examples from `behave` usage, you saw that you can implement a function in python. Connect it with `behave` decorator `@step` to the text in `.feature` file.
 
-    Over the years we have had many step implementations and usage from features. Most of the time if I wanted to do something I had to code a Python function, mark it with a decorator and use that decorator in the feature. Some of them were used in so many projects, I found myself reimplementing or copying the same step over and over. So I decided to provide them to everyone and all they have to do is to keep the format so that the `behave` can match them.
+    Over the years we have had many `step` implementations and usage from `features`. Most of the time if I wanted to do something I had to code a Python function, mark it with a decorator and use that decorator in the `feature`. Some of them were used in so many projects, I found myself reimplementing or copying the same `step` over and over. So I decided to provide them to everyone and all they have to do is to keep the format so that the `behave` can match them.
 
     The location where you can see [commonly used steps](https://gitlab.com/dogtail/qecore/-/blob/master/qecore/common_steps.py).
 
@@ -592,14 +592,14 @@ I have started to develop `qecore` only a few years back, so this project is rel
         * Terminal has "2" tabs
     ```
 
-    Debugging of this issue works very simply. If the common step failed to match a name or a role name, which are required data fields, search the Application for these labels and print what is presented. We can clearly see that the typo was in the name `Filee` and no such name exists in given Application tree. We can fix the typo and continue writing tests.
+    Debugging of this issue is very simple. If the `common step` failed to match a name or a role name, which are required data fields, search the Application for these labels and print what is presented. We can clearly see that the typo was in the name `Filee` and no such name exists in given Application tree. We can fix the typo and continue writing tests.
 
   - #### Another provided functionality
 
     The qecore project provides truly a lot for our day-to-day use. I cannot list and talk about everything as this article is already very long and more is to come. I would still like to list a few other features:
 
     - **Flatpaks** - just as we are able to load applications with `get_application` we also have a function to work with Flatpaks `get_flatpak`.
-    - **Backtrace** - once there is an issue with the core component (in this project it is `gnome-terminal`) we are testing and a coredump is detected via `coredumpctl`, `qecore` will attempt to get backtrace from `gdb` after installing all available debuginfo and debugsource packages that the `gdb` will say it needs. This needs to be toggled on as it takes quite a lot of time and space. The resulting backtrace is than attached to the report - [Backtrace from coredump Example](https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html).
+    - **Backtrace** - once there is an issue with the core component (in this project it is `gnome-terminal`) we are testing and a coredump is detected via `coredumpctl`, `qecore` will attempt to get backtrace from `gdb` after installing all available debuginfo and debugsource packages that the `gdb` will say it needs. This needs to be toggled on as it takes quite a lot of time and space. The resulting backtrace is than attached to the report as can be seen in [Backtrace from coredump Example](https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html).
 
     - **Logging** - we have a continuous logging of `qecore` and what it does, our own tool can also have a bug. Once any test fails, its logging data are attached to the HTML report to make sure `qecore` did not cause the mistake. We also can make sure the `qecore` is working as intended at all times. This logging can be also directed to the console, so user will be able to see it in real time. You can try it in the provided project with `$ LOGGING=true behave -kt start_via_command`
 
@@ -619,7 +619,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
       - Provides a lot of simple steps that are ready to be used with built-in debugging on error
       - Provides a way to write automated tests with image matching
 
-## Full project example
+## GNOME Terminal Full Project Example
 
   Now that I have covered everything our automation solution needs, let's get to the setup and execution of the GNOME Terminal test suite on Fedora 38 with Wayland.
 
@@ -666,7 +666,10 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
 ### Installing, building and execution
 
-  Now all we need is to get our tools to your machine, clone the GNOME Terminal automation suite repository and execute it.
+  Now we need to:
+  - Get our tools to your machine
+  - Clone the GNOME Terminal automation suite repository
+  - Start the automation.
 
   It is important that following commands are executed with `sudo` if the command says so. Reason for this is consistency and not having to deal with permissions. There is also no benefit installing it in any other way. The user and automation will have full control of the machine, so we can test everything we are required to.
 
@@ -762,7 +765,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     For the error above, simply install `gedit` that is used in some tests:
 
     ```sh
-    dnf install gedit
+    sudo dnf install -y gedit
     ```
 
     And run it again:
@@ -818,7 +821,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - ### **AttributeError: 'Ponytail' object has no attribute 'connected'**
 
-    This error means the ponytail daemon is not running. Check if the `gnome-ponytail-daemon` process is running, it should be during a running session, but something can still happen. We have three solutions here:
+    This error means the `gnome-ponytail-daemon` is not running. Check if the `gnome-ponytail-daemon` process is running, it should be during a running session, but something can still happen. We have three solutions here:
 
     1. You can either restart the session, which should fix it most of the time.
     ```sh
@@ -838,8 +841,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     cd - # Switch back to gnome-terminal directory.
     ```
 
-
-    *The following section is no longer valid. José found an issue that caused the gnome-ponytail-daemon to hang. Issue was fixed but kept here for visibility.*
+      *The following section is no longer valid. José found an issue that caused the gnome-ponytail-daemon to hang. Issue was fixed but kept here for visibility.*
 
     3. There is also possibility that the running daemon is faulty (happened to me while testing this article). When you kill the running daemon a new one will start, and it will once again work.
     ```sh
