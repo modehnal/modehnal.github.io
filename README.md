@@ -541,7 +541,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     from qecore.common_steps import *
     ```
 
-    In following example, I did not have to implement any steps, and I was able to successfully write and execute a test:
+    In the following example, I did not have to implement any `steps` and I was able to successfully write and execute a test:
 
     ```gherkin
     @view_menu_show_menubar
@@ -600,7 +600,15 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     - **Flatpaks** - just as we are able to load applications with `get_application` we also have a function to work with Flatpaks `get_flatpak`.
     - **Backtrace** - once there is an issue with the core component (in this project it is `gnome-terminal`) we are testing and a coredump is detected via `coredumpctl`, `qecore` will attempt to get backtrace from `gdb` after installing all available debuginfo and debugsource packages that the `gdb` will say it needs. This needs to be toggled on as it takes quite a lot of time and space. The resulting backtrace is than attached to the report - [Backtrace from coredump Example](https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html).
-    - **Logging** - we have a continuous logging of `qecore` and what it does, our own tool can also have a bug. Once any test fails, its logging data are attached to the HTML report to make sure `qecore` did not cause the mistake. We also can make sure the `qecore` is working as intended at all times. This logging can be also directed to the console, so user will be able to see it in real time. You can try it in the provided project with `$ LOGGING=true behave -kt start_via_command`
+
+    > [!TIP]
+    > Some features are good enough that we would like to use them by hand when required. The `qecore` provides a script for backtrace retrieval. `$ qecore_backtrace_from_coredump <coredump_pid>`
+
+    - **Logging** - we have a continuous logging of `qecore` and what it does, our own tool can also have a bug. Once any test fails, its logging data are attached to the HTML report to make sure `qecore` did not cause the mistake. We also can make sure the `qecore` is working as intended at all times. This logging can be also directed to the console, so user will be able to see it in real time.
+
+      > [!TIP]
+      >  You can try it in the provided project with `$ LOGGING=true behave -kt start_via_command`
+
     - **Image matching** - from time to time there is a use case, where the accessibility is not working correctly, or the accessibility data is not there at all. For these situations we cannot do much, but we took an inspiration from OpenQA. In such cases we can identify widget and parts of the desktop simply with an image (`needle`) and try to find that image in the screenshot we take. These functions will return coordinates to us, and we can click to the correct place. The qecore has an image matching section that can be imported and used. It also provides pre-coded steps that are used most of the time. For the times you need to adjust the execution, we provide the `Matcher` class and its methods, so that you can build your custom functionality easily. For exact implementation and usage you can look in [image matching](https://gitlab.com/dogtail/qecore/-/blob/master/qecore/image_matching.py)
 
     More features are being added frequently based on our need and ideas.
