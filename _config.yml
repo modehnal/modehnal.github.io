@@ -1,4 +1,5 @@
 theme: jekyll-theme-Cayman
+markdown: kramdown
 
 # Setup
 title: Automation through Accessibility
