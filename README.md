@@ -1298,7 +1298,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   If you follow the setup here and succeed, please consider `Staring` the [GNOMETerminalAutomation project on GitHub](https://github.com/modehnal/GNOMETerminalAutomation). It will help us in two ways. *One* is to see how many people got this far and *two* is making this project more visible.
 
-  If you would fail for any reason, please open an Issue on the GitHub so that I can fix something I might have missed or to help you fix something I did not think about.
+  If you would fail for any reason, please open an Issue on GitHub so that I can fix something I might have missed or to help you fix something I did not think about.
 
   Thank you for reading.
 
