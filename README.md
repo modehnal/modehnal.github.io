@@ -30,6 +30,41 @@
 - [Keywords](#keywords)
 - [Sources](#sources)
 
+> ##### DANGER
+>
+> You cannot delete an ephemeral message.
+{: .block-danger }
+
+> ##### WARNING
+>
+> Be sure that you're familiar with things like async/await and object destructuring
+> before continuing, as we'll be making use of features like these.
+{: .block-warning }
+
+> ##### TIP
+>
+> This guide is last tested with @napi-rs/canvas^0.1.20, so make sure you have
+> this or a similar version after installation.
+{: .block-tip }
+
+
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+
+
+
 ## Introduction
 
 Hello and welcome.

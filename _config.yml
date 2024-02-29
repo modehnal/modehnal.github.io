@@ -4,3 +4,12 @@ theme: jekyll-theme-Cayman
 title: Automation through Accessibility
 description: GNOME Terminal automation on Fedora 38 with Wayland
 author: Michal Odehnal
+
+
+markdown_ext: markdown,mkdown,mkdn,mkd,md,admonitions,docusaurus
+
+plugins:
+  - Admonitions
+  - Docusaurus
+  - admonitions
+  - docusaurus
