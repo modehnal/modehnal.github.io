@@ -31,6 +31,22 @@
 - [Sources](#sources)
 
 
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+
+
 ## Introduction
 
 Hello and welcome.
@@ -194,26 +210,26 @@ Feature: Showing off behave
 The steps.py file contents are as follows:
 
 ```python
-    # -- FILE: features/steps/steps.py
-    from behave import given, when, then, step
+# -- FILE: features/steps/steps.py
+from behave import given, when, then, step
 
-    @given('we have behave installed')
-    def step_impl(context):
-        pass
+@given('we have behave installed')
+def step_impl(context):
+    pass
 
-    @when('we implement {number:d} tests')
-    def step_impl(context, number):  # -- NOTE: number is converted into integer
-        assert number > 1 or number == 0
-        context.tests_count = number
+@when('we implement {number:d} tests')
+def step_impl(context, number):  # -- NOTE: number is converted into integer
+    assert number > 1 or number == 0
+    context.tests_count = number
 
-    @then('behave will test them for us!')
-    def step_impl(context):
-        assert context.failed is False
-        assert context.tests_count >= 0
+@then('behave will test them for us!')
+def step_impl(context):
+    assert context.failed is False
+    assert context.tests_count >= 0
 
-    @step('Dummy Step')
-    def dummy_step(context):
-        pass
+@step('Dummy Step')
+def dummy_step(context):
+    pass
 ```
 
 To better visualize the structure of `behave's` `.feature` files. Single `Feature` file can contain multiple `Scenarios` and each `Scenario` contains `Steps` that are implemented in `steps.py` file that is located in `steps` directory:
