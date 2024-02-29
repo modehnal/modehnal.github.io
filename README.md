@@ -674,7 +674,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     First lets start with the base API - `dogtail`. You will soon find out dogtail project is not updated in the `pypi` and that we have our up-to-date version in a different repository as a `rpm` package. I am also a bit confused at times as to where the most up-to-date version is of this project. *In the future plans section I am proposing a solution.*
 
-    Fortunately we can still use `pip` to install the dogtail straight from `git` via command:
+    Fortunately we can still use `pip` to install the `dogtail` straight from `git` via command:
     ```
     sudo dnf install python3-pip
     sudo python3 -m pip install git+https://gitlab.com/dogtail/dogtail@devel/wayland
@@ -682,7 +682,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - #### Build and Install the helper daemon for Wayland automation - `gnome-ponytail-daemon`
 
-    For automation on Wayland we also need a helper daemon for dogtail. The `gnome-ponytail-daemon` source code is in C, so we need to clone the project, build it and install it. It has a few dependencies that we will also get now:
+    For automation on Wayland we also need a helper daemon for `dogtail`. The `gnome-ponytail-daemon` source code is in C, so we need to clone the project, build it and install it. It has a few dependencies that we will also get now:
     ```bash
     sudo dnf install meson gcc glib2-devel
     git clone https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon.git
@@ -818,7 +818,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - ### **AttributeError: 'Ponytail' object has no attribute 'connected'**
 
-    This error means the ponytail daemon is not running. Check if the gnome-ponytail-daemon process is running, it should be during a running session, but something can still happen. We have three solutions here:
+    This error means the ponytail daemon is not running. Check if the `gnome-ponytail-daemon` process is running, it should be during a running session, but something can still happen. We have three solutions here:
 
     1. You can either restart the session, which should fix it most of the time.
     ```sh
@@ -890,7 +890,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     ipython3 # Run it.
     ```
 
-    In this interactive shell you will import the `dogtail`'s tree root on your own and save the `Atspi` root of `gnome-terminal` to a variable:
+    In this interactive shell you will import the `dogtail's` tree root on your own and save the `Atspi` root of `gnome-terminal` to a variable:
 
     ```python
     # IPython
@@ -938,7 +938,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     Now let's return to the `app` `Atspi` node.
 
-    You have a root, and you need to find out more about a button. Let's say we have Showing Menubar and want to click on the `File` button.
+    You have a root, and you need to find out more about a button. Let's say we have `Showing Menubar` and want to click on the `File` button.
 
     You do not know more about its attributes so let's find out:
 
@@ -1128,14 +1128,14 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   Lets exit the `ipython3` since there is a lock in effect and `Sniff` will not/should not start when you are working with it in command line.
 
-  Once you open the `Sniff` you can see the applications opened, and you can click and browse their content. For better visual presentation click on `Actions` -> `Highlight Items`. With Xorg this shows you the `red squares` correctly around the selected nodes, with Wayland this will be shown incorrectly. That is one of the reason why going through the tree via interactive shell is better. Once you get used to it, searching for your desired node is a matter of seconds.
+  Once you open the `Sniff` you can see the applications opened and you can browse their content. For better visual presentation click on `Actions` -> `Highlight Items`. With Xorg this shows you the `red squares` correctly around the selected nodes, with Wayland this will be shown incorrectly. That is one of the reason why going through the tree via interactive shell is better. Once you get used to it, searching for your desired node is a matter of seconds.
 
 ### Explaining the rest of the gnome-terminal project
 
 - #### The mapper.yaml
 
   This file serves as an automation suite definition:
-  - It contains definition of the `gnome-terminal` component and what arches it will run on and if it can run with Wayland
+  - It contains definition of the `gnome-terminal` component and what architectures it will run on and if it can run with Wayland
   - It lists dependencies with beaker task, so we can start appropriate machine setup
   - Defines what HW we are running
   - Setup and cleanup commands, which are empty in this project. Some setup from `runtest.sh` could be here, but I am used to having it in the `runtest.sh` file.
@@ -1181,7 +1181,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   There were instances where I could not differentiate between new and old `needle`, to my eye it looked exactly the same, but the new `needle` started passing the test. It is quite a long process to write even a single test.
 
-  On the other hand with `Atspi`, if we see a failed test, most of the time it is a bug or the UI label or placement has changed. On bugs the issue is clear and there is nothing to be changed on the automation side. With UI change we check Screenshot or Video to see what happened, and usually we can fix the test very quickly by changing order of clicks or rewriting a string. Once the suite is written, it can be easily expanded with new test cases and maintained through different version releases. There are some issues we encounter when writing the tests that cause instability and that has to be accounted for but once the suite is tried and tested it is very stable.
+  On the other hand with `Atspi`, if we see a failed test, most of the time it is a bug or the UI label or placement has changed. On bugs the issue is clear and there is nothing to be changed on the automation side. With UI change we check `Screenshot` or `Video` to see what happened, and usually we can fix the test very quickly by changing order of clicks or rewriting a string. Once the suite is written, it can be easily expanded with new test cases and maintained through different version releases. There are some issues we encounter when writing the tests that cause instability and that has to be accounted for but once the suite is tried and tested it is very stable.
 
   For me personally these tools are way too different to be compared, but there is no question about difficulty of using `opencv` and comparing two images and working with Python objects. Working with objects will always be more stable.
 
@@ -1193,7 +1193,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   To fix this you can use the `update_coords()` method from `dogtail.rawinput` to offset (x, y) of the final coordinate.
 
-  I still hope I will be able to remove this method in the future and figure out the size of the `shadows` dynamically based on the application, so that the user is not forced to make manually offset for all clicks, although my recent experimenting and research is proving me wrong.
+  I still hope I will be able to remove this method in the future and figure out the size of the `shadows` dynamically based on the application, so that the user is not forced to make manually offset for all clicks, although my recent experiments and research is proving me wrong.
 
   This offset, while working with GTK4, will now cause the GTK3 applications actions to be in the wrong place and there is no reason for a suite to not work with both.
 
@@ -1201,7 +1201,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
 ## Usage with Fedora 39
 
-  Please beware that this article is for Fedora 38. While it will work on 39 too, there are some design changes that the `qecore` is not yet adapted for. Like the `Activities` label missing which `qecore` currently uses for closing gnome-shell overview.
+  Please beware that this article is for Fedora 38. While it will work on 39 too, there are some design changes that the `qecore` is not yet adapted for. Like the `Activities` label missing which `qecore` currently uses for closing `gnome-shell` overview.
 
   This suite will work on Fedora 39 as is, but you will see some tests failing.
 
@@ -1213,7 +1213,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   All this work that went into making our tool sets is very dependent on Accessibility working, everything depends on and is built around `Atspi`. If Accessibility went away or would be broken, we would not be able to do as much as we can today. Currently, we can automate most of the GNOME Applications including `gnome-shell` since from the point of view of Accessibility, the `gnome-shell` is just another application.
 
-  This article aims to show how 'easy' it is to get the automation of GNOME Applications off the ground. We hope, by providing the full `gnome-terminal` component automation example for anyone, many people will try it out. We would love if people found it useful and would attempt to contribute to upstream projects with automation tests.
+  This article aims to show how *easy* it is to get the automation of GNOME Applications off the ground. We hope, by providing the full `gnome-terminal` component automation example for anyone, many people will try it out. We would love if people found it useful and would attempt to contribute to upstream projects with automation tests.
 
   The most desired outcome would be to have more eyes on Accessibility. To provide justification and motivation for development of Accessibility and its ability to be used for automation.
 
@@ -1248,13 +1248,13 @@ I have started to develop `qecore` only a few years back, so this project is rel
   `Aspirations`:
   If we introduce automation via accessibility to more people with a coherent project like GNOMEAutomation, that is not collection of projects spliced together to just work, we might have a wider audience and user base. That might help to attract talent to our teams that would help improve Accessibility and keep it in good state.
 
-  With a project like this we also might have a wider base for Fedora testing days. Some things already work on Fedora and are mostly usable. The issue is a long setup as you can see, that this project could hopefully solve. I would imagine that once a test day comes, we could have GitLab/GitHub page with our testing suites that I and others would contribute to, so that anyone can just come, download the project and run the tests. This would be quite rich source of data that user would not have to spend a lot of time on. Simply boot VM, run the suits, report results. There is of course a need for real HW testing as well, but that is not the issue we are trying to solve here. Currently, I try to participate in test days, but I am not able to fit it to my schedule every time, which is a shame.
+  With a project like this we also might have a wider base for `Fedora testing days`. Some things already work on Fedora and are mostly usable. The issue is a long setup as you can see, that this project would hopefully solve. I would imagine that once a test day comes, we could have GitLab/GitHub page with our testing suites that I and others would contribute to, so that anyone can just come, download the project and run the tests. This would be quite rich source of data that user would not have to spend a lot of time on. Simply boot VM, run the suits, report results. There is of course a need for real HW testing as well, but that is not the issue we are trying to solve here. Currently, I try to participate in test days, but I am not able to fit it to my schedule every time, which is a shame.
 
 ### The behave
 
   Its file structure is the template of our project and all other things are going before or after the `behave` command line execution. `Behave` has limitations that we have to hack around sometimes to get our desired outcome. Those are rare, although we have a recent example.
 
-  We need to generate a log no matter what part fails, so that the end user can evaluate what went wrong. The problem starts when the very first function is called, `before_all`. Something can still go wrong, and we need to attach the data to the report. The problem is that `behave`, even if it was called as `behave -f html-pretty`, "does not know" about the formatter in the `before_all` function. So when we are dealing with an error in setup, we have no place to attach it to. We can bypass it by saving the error and evaluate any errors in the very next function `before_scenario`, end the run, and attach it to the report since `behave` now knows it has a formatter defined. This is solvable but quite inconvenient.
+  We need to generate a log no matter what part fails, so that the end user can evaluate what went wrong. The problem starts when the very first function is called, `before_all`. Something can still go wrong, and we need to attach the data to the report. The problem is that `behave`, even if it was called as `behave -f html-pretty`, *does not know* about the formatter in the `before_all` function. So when we are dealing with an error in setup, we have no place to attach it to. We can bypass it by saving the error and evaluate any errors in the very next function `before_scenario`, end the run, and attach it to the report since `behave` now knows it has a formatter defined. This is solvable but quite inconvenient.
 
   There are rare issues where the `behave` fails, and no logs are generated while we would love at least partial results. But since `behave` is the one who generates the output, if `behave` fails we have nothing to parse for our `html-pretty` output. Sometimes `behave` also captures errors, and we have to go for an adventure to see where the error was coming from since the error we get said nothing about the real issue. There are no blockers currently, just inconveniences that we would love not to deal with.
 
@@ -1296,7 +1296,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   We would love to know, how many people will actually attempt to execute GNOME Terminal test suite.
 
-  If you follow the setup here and succeed, please consider `Staring` the project on GitHub. It will help us in two ways. One is to see how many people got this far and second is making this project more visible.
+  If you follow the setup here and succeed, please consider `Staring` the [GNOMETerminalAutomatio project](https://github.com/modehnal/GNOMETerminalAutomation) on GitHub. It will help us in two ways. *One* is to see how many people got this far and *two* is making this project more visible.
 
   If you would fail for any reason, please open an Issue on the GitHub so that I can fix something I might have missed or to help you fix something I did not think about.
 
