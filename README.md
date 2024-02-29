@@ -544,6 +544,9 @@ I have started to develop `qecore` only a few years back, so this project is rel
     In following example, apart from one step `Terminal contains...`, I did not have to implement all other steps, and I was able to successfully write and execute a test:
 
     ```gherkin
+    @basic_feature
+    Feature: Basic Tests
+
       @copy_and_paste
       Scenario: Copy and paste from terminal to another terminal.
         * Start application "terminal" via "command"
