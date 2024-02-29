@@ -3,11 +3,11 @@
 
 - [Introduction](#introduction)
 - [Automation stack for GNOME Applications](#automation-stack-for-gnome-applications)
-  - [What do we use? Automation API - dogtail](#what-do-we-use-automation-api---dogtail)
-  - [How are we dealing with automation on Wayland? The gnome-ponytail-daemon](#how-are-we-dealing-with-automation-on-wayland-the-gnome-ponytail-daemon)
-  - [Giving the API a structure to be used in automation - behave](#giving-the-api-a-structure-to-be-used-in-automation---behave)
-  - [The automation suite result page in form of behave-html-pretty-formatter project](#the-automation-suite-result-page-in-form-of-behave-html-pretty-formatter-project)
-  - [Filling all the gaps and providing useful tools with the qecore project](#filling-all-the-gaps-and-providing-useful-tools-with-the-qecore-project)
+  - [What do we use? Automation API - **dogtail**](#what-do-we-use-automation-api---dogtail)
+  - [How are we dealing with automation on Wayland? The **gnome-ponytail-daemon**](#how-are-we-dealing-with-automation-on-wayland-the-gnome-ponytail-daemon)
+  - [Giving the API a structure to be used in automation - **behave**](#giving-the-api-a-structure-to-be-used-in-automation---behave)
+  - [The automation suite result page in form of **behave-html-pretty-formatter** project](#the-automation-suite-result-page-in-form-of-behave-html-pretty-formatter-project)
+  - [Filling all the gaps and providing useful tools with the **qecore** project](#filling-all-the-gaps-and-providing-useful-tools-with-the-qecore-project)
 - [Full project example](#full-project-example)
   - [Basic machine setup required before any action](#basic-machine-setup-required-before-any-action)
   - [Installing, building and execution](#installing-building-and-execution)
@@ -47,7 +47,7 @@ Please keep in mind that nobody is perfect, and we are no exception. If you see 
 
 First, let's go over individual parts of our automation stack that we use.
 
-### What do we use? Automation API - dogtail
+### What do we use? Automation API - **dogtail**
 
 We use Assistive Technology - Service Provider Interface (AT-SPI) which is a set of interfaces that allow access technologies, such as screen readers, to programmatically determine what is being displayed on the screen and simulate keyboard and mouse events. It can be also used for automated testing.
 
@@ -122,7 +122,7 @@ Below you can see a simple example of how we interact with applications, provide
 With these basic queries we can do quite a lot.
 
 
-### How are we dealing with automation on Wayland? The gnome-ponytail-daemon
+### How are we dealing with automation on Wayland? The **gnome-ponytail-daemon**
 
 While the example provided above will work for Xorg. For Wayland there is an extra step we need to do in order to successfully navigate the application via correct coordinates.
 
@@ -148,7 +148,7 @@ The ponytail project repository is located here [gnome-ponytail-daemon](https://
 
 You will notice that there is an example how to use `gnome-ponytail-daemon` for automation without a `dogtail` API. The `ponytail` API is used by `dogtail` when required.
 
-### Giving the API a structure to be used in automation - behave
+### Giving the API a structure to be used in automation - **behave**
 
 So now we have explained what APIs we use at the base level. Now we need some structure to use this and have the code base scalable.
 We use [behave](https://github.com/behave/behave) and its file structure as our automation structure.
@@ -274,7 +274,7 @@ Feature: Dummy Feature
 
 I have mentioned separating test scenarios executed to their own result pages. That is what the project `behave-html-pretty-formatter` is for.
 
-### The automation suite result page in form of behave-html-pretty-formatter project
+### The automation suite result page in form of **behave-html-pretty-formatter** project
 
 The result of the `behave` run you saw above is given to the console in a `pretty` format, which is the `Standard colourised pretty formatter`. The `behave` has quite a lot of formatters to use. These formatters are built-in and can be chosen from to get the resulted data in a lot of formats ready to be used for various purposes.
 
@@ -328,7 +328,7 @@ The project page can be found here [behave-html-pretty-formatter](https://github
 
 We can start the automating at this point. Although for the purpose of a general automation that will be very hard, as you would start from scratch and I imagine you would like to have much more that what is presented. Which is where `qecore` comes in.
 
-### Filling all the gaps and providing useful tools with the qecore project
+### Filling all the gaps and providing useful tools with the **qecore** project
 
 The `qecore` project is a library of tools and commonly used functions that are required throughout our entire automation stack.
 
