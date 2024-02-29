@@ -358,7 +358,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     - It does extensive troubleshooting when the GDM start fails ([The qecore-headless troubleshooting](https://modehnal.github.io/data/headless_colour_troubleshooting.png)) In the example you will not see anything wrong, I forced the error by stopping the GDM before the verification section got executed.
     - It can enforce session type, meaning it will check the system configuration and running session and will fail on mismatch
     - It provides `--keep <int>` parameter, enabling to use one session for multiple tests. For example `qecore-headless --keep 5 "behave -kt <test_name>"` will make sure it runs 5 tests before restarting the session.
-    - I am testing this script on RHEL8/9, Fedoras from version 35 to rawhide and on multiple architectures namely x86_64, ppc64le, aarch64 and s390x. It works on these architectures and systems out of the box.
+    - I am testing this script on RHEL8/9, Fedoras from version 35 to rawhide and on multiple architectures namely `x86_64`, `ppc64le`, `aarch64` and `s390x`. It works on these architectures and systems out of the box.
 
     All in all, this is a base script we run before we start to do anything. The `qecore-headless` is a script that executes another script. In the line above it started `behave -kt <test_name>`. If it does not get any parameter the `bash` is the default script. Which is what we want on our machines where we test by hand. We start the script and after that we only work with behave. While from time to time restarting the session simply by `Ctrl+D` or `exit` and starting new `qecore-headless`. Very convenient and easy to use.
 
@@ -412,7 +412,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
   - #### Application configuration
 
-    When executing any test suite, the user needs to identify an application that the suite will be using. For the purpose of automation of `gnome-terminal` on `Fedora` you can see we need to define 3 "applications". The `gnome-terminal` itself, the `preferences` which from some version is in `Atspi` as a standalone application and `gnome-control-center` named as settings.
+    When executing any test suite, the user needs to identify an application that the suite will be using. For the purpose of automation of `gnome-terminal` on `Fedora` you can see we need to define 3 *applications*. The `gnome-terminal` itself, the `preferences` which from some version is in `Atspi` as a standalone application and `gnome-control-center` named as settings.
 
     This allows seamless function of start/stop tests which will take the data from their respective `.desktop` files and use it for its correct function.
 
@@ -509,12 +509,10 @@ I have started to develop `qecore` only a few years back, so this project is rel
       - Stopping the video recording
       - Cleanup, closing all started applications
       - Injecting data to the `behave-html-pretty-formatter`. Some of these are *on-fail-only*, but that can be changed in `sandbox`:
-        - Attach screenshot
-        - Attach journal from the suite run
-        - Attach backtrace from coredump
-        - Attach video
-        - Attach abrt/FAF links
-        - Attach debug logs
+        - `context.sandbox.attach_faf_on_pass = True`
+        - `context.sandbox.attach_video_on_pass = True`
+        - `context.sandbox.attach_journal_on_pass = True`
+        - `context.sandbox.attach_screenshot_on_pass = True`
 
     You can see full `environment.py` example bellow.
 
