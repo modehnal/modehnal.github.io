@@ -973,7 +973,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     There are many more ways how to get the desired node in the tree. You can see the details for example in [dogtail's documentation](https://fedorapeople.org/~vhumpa/dogtail/epydoc/) which is unfortunately not up to date, but I was learning on this, so it is very much usable.
 
-    For function or methods you cannot find you can look in the project files [dogtail](https://gitlab.com/dogtail/dogtail/).
+    For function or methods you cannot find you can look in the [dogtail's project files](https://gitlab.com/dogtail/dogtail/).
 
     You can also take the inspiration of the API in the provided `gnome-terminal` project. There should be enough examples of implementation to get you started.
 
@@ -1137,7 +1137,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 - #### The mapper.yaml
 
   This file serves as an automation suite definition:
-  - It contains definition of the `gnome-terminal` component and what architectures it will run on and if it can run with Wayland
+  - It contains definition of the `gnome-terminal` component, what architectures it will run on and if it can run with Wayland
   - It lists dependencies with beaker task, so we can start appropriate machine setup
   - Defines what HW we are running
   - Setup and cleanup commands, which are empty in this project. Some setup from `runtest.sh` could be here, but I am used to having it in the `runtest.sh` file.
@@ -1152,7 +1152,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
   - Tagging for some other automation logic - like `gate`
   - What extra packages to install for specific test
 
-  Most of the content is this file is not relevant to this article.
+  Most of the content in this file is not relevant to this article.
 
 - #### The runtest.sh
 
