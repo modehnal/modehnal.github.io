@@ -30,38 +30,37 @@
 - [Keywords](#keywords)
 - [Sources](#sources)
 
-> ##### DANGER
->
-> You cannot delete an ephemeral message.
-{: .block-danger }
+```md
+:::note
 
-> ##### WARNING
->
-> Be sure that you're familiar with things like async/await and object destructuring
-> before continuing, as we'll be making use of features like these.
-{: .block-warning }
+Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
 
-> ##### TIP
->
-> This guide is last tested with @napi-rs/canvas^0.1.20, so make sure you have
-> this or a similar version after installation.
-{: .block-tip }
+:::
 
+:::tip
 
-> [!NOTE]
-> Useful information that users should know, even when skimming content.
+Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
 
-> [!TIP]
-> Helpful advice for doing things better or more easily.
+:::
 
-> [!IMPORTANT]
-> Key information users need to know to achieve their goal.
+:::info
 
-> [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
+Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
 
-> [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
+:::
+
+:::warning
+
+Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
+
+:::
+
+:::danger
+
+Some **content** with _Markdown_ `syntax`. Check [this `api`](#).
+
+:::
+```
 
 
 
