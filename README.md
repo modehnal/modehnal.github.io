@@ -13,7 +13,7 @@
   - [Installing, building and execution](#installing-building-and-execution)
   - [Errors you can encounter](#errors-you-can-encounter)
   - [The main queries you will be using](#the-main-queries-you-will-be-using)
-  - [Explaining the rest of the `gnome-terminal` project](#explaining-the-rest-of-the-gnome-terminal-project)
+  - [Explaining the rest of the gnome-terminal project](#explaining-the-rest-of-the-gnome-terminal-project)
 - [Examples](#examples)
 - [Comparison of OpenQA vs Accessibility](#comparison-of-openqa-vs-accessibility)
 - [Usage with GTK4](#usage-with-gtk4)
@@ -1142,7 +1142,7 @@ In : app.tree()
 
   Once you open the `Sniff` you can see the applications opened and you can browse their content. For better visual presentation click on `Actions` -> `Highlight Items`. With Xorg this shows you the `red squares` correctly around the selected nodes, with Wayland this will be shown incorrectly. That is one of the reason why going through the tree via interactive shell is better. Once you get used to it, searching for your desired node is a matter of seconds.
 
-### Explaining the rest of the `gnome-terminal` project
+### Explaining the rest of the gnome-terminal project
 
 - #### The mapper.yaml
 
