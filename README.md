@@ -68,7 +68,7 @@ We are using the `dogtail` project as an API for all we do. The reality of thing
     └──────────────────────────────────┘
 ```
 
-Below you can see a simple example of how we interact with applications, provided you have a running session and the accessibility toolkit is enabled. This example will open overview, start gnome-terminal and execute a command:
+Below you can see a simple example of how we interact with applications, provided you have a running session, the accessibility toolkit is enabled, and you are using Xorg. To make this example fully functional with Wayland, you will need information from the next section. This example will open overview, start gnome-terminal and execute a command:
 
 ```python
 #!/usr/bin/python3
@@ -83,7 +83,7 @@ sleep(1) # Give overview a little time to show.
 typeText("Terminal") # Search application.
 pressKey("Enter") # Confirm by Enter.
 
-sleep(1) # Give application a little time to start.
+sleep(1) # Give the application a little time to start.
 
 # Load application root to variable.
 app = root.application("gnome-terminal-server") # Save root object.
@@ -103,19 +103,20 @@ show_menubar = app.findChild(
 if not show_menubar.checked:
     show_menubar.click()
 else:
+    # Close the menu if the Menubar is already checked.
     pressKey("Esc")
 
-sleep(1) # Give application a little time to close the menu.
+sleep(1) # Give the application a little time to close the menu.
 
 app.child("File", "menu").click() # Find File menu and click.
 app.child("New Tab", "menu").click() # Find New Tab menu and click.
 app.findChild(lambda x: "1." in x.name).click() # Confirm the profile.
 
-sleep(1) # Give terminal a little time to open the New Tab.
+sleep(1) # Give the terminal a little time to open the New Tab.
 
-# Execute command.
-typeText("echo Hello World") # Type command to terminal.
-pressKey("Enter") # Confirm command.
+# Execute the command.
+typeText("echo Hello World") # Type the command to terminal.
+pressKey("Enter") # Confirm the command.
 ```
 
 With these basic queries we can do quite a lot.
@@ -145,7 +146,7 @@ I will show how to build and use ponytail in the `GNOME Terminal Full Project Ex
 
 The ponytail project repository is located here [gnome-ponytail-daemon](https://gitlab.gnome.org/ofourdan/gnome-ponytail-daemon)
 
-You will notice that there is an example how to use `gnome-ponytail-daemon` for automation without a `dogtail` API. The `ponytail` API is used by `dogtail` when required.
+You will notice that in the project is an example how to use `gnome-ponytail-daemon` for automation without a `dogtail` API. The `ponytail` API is used by `dogtail` when required.
 
 ### Giving the API a structure to be used in automation - **behave**
 
