@@ -393,7 +393,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
     We start the suite with some commonly used methods and functions.
 
-    This is done with the `qecore` class `TestSandbox` that we will use for everything. I will use example from the full example of `gnome-terminal` that I will be introducing later in this article.
+    This is done with the `qecore` class `TestSandbox` that we will use for everything. I will use examples from the project `gnome-terminal` that I will be introducing later in this article.
 
     The behave file `environment.py` has a few defined functions that `behave` has hooks for, which we can fill with logic that we need. So we are going to use the `before_all` and initialize our `TestSandbox` class and save it to the variable `context` which is a data structure of behave that can be used to save and transfer data throughout all the files during the behave run. We can define our variables in `context`, so we named it `context.sandbox`. From this moment the sandbox class will be available in the Python `behave` files, and we can start using our `sandbox`. I again omitted some parts for simplicity, the full example will have the entire structure.
 
@@ -523,7 +523,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
         - `context.sandbox.attach_journal_on_pass = True`
         - `context.sandbox.attach_screenshot_on_pass = True`
 
-    You can see full `environment.py` example bellow.
+    You can see full `environment.py` in the `gnome-terminal` project.
 
   - #### To summarize all what the user needs to do for setup
 
@@ -608,6 +608,7 @@ I have started to develop `qecore` only a few years back, so this project is rel
     The qecore project provides truly a lot for our day-to-day use. I cannot list and talk about everything as this article is already very long and more is to come. I would still like to list a few other features:
 
     - **Flatpaks** - just as we are able to load applications with `get_application` we also have a function to work with Flatpaks `get_flatpak`.
+
     - **Backtrace** - once there is an issue with the core component (in this project it is `gnome-terminal`) we are testing and a coredump is detected via `coredumpctl`, `qecore` will attempt to get backtrace from `gdb` after installing all available debuginfo and debugsource packages that the `gdb` will say it needs. This needs to be toggled on as it takes quite a lot of time and space. The resulting backtrace is than attached to the report as can be seen in [Backtrace from coredump Example](https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html).
 
     - **Logging** - we have a continuous logging of `qecore` and what it does, our own tool can also have a bug. Once any test fails, its logging data are attached to the HTML report to make sure `qecore` did not cause the mistake. We also can make sure the `qecore` is working as intended at all times. This logging can be also directed to the console, so user will be able to see it in real time. You can try it in the provided project with `$ LOGGING=true behave -kt start_via_command`
