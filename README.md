@@ -851,9 +851,8 @@ I have started to develop `qecore` only a few years back, so this project is rel
     cd - # Switch back to gnome-terminal directory.
     ```
 
-      *The following section is no longer valid. José found an issue that caused the gnome-ponytail-daemon to hang. Issue was fixed but kept here for visibility.*
+    3. *The following section is no longer valid. José found an issue that caused the gnome-ponytail-daemon to hang. Issue was fixed but kept here for visibility.* There is also possibility that the running daemon is faulty (happened to me while testing this article). When you kill the running daemon a new one will start, and it will once again work.
 
-    3. There is also possibility that the running daemon is faulty (happened to me while testing this article). When you kill the running daemon a new one will start, and it will once again work.
     ```sh
     # Find pid of the daemon.
     ps ax | grep pony
