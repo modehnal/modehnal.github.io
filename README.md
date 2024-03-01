@@ -1032,7 +1032,9 @@ scroll_pane.value = scroll_pane.maxValue
 # in which case you will not be able to scroll this way.
 ```
 
-  Now this was quite a lot. Let's say we do not care about a single button, we want to see the entire tree. Again we have multiple options.
+  With these you can do quite a lot.
+
+  Let's say we do not care about a single button, we want to see the entire tree. Again we have multiple options.
 
   We can use the `<Atspi.Accessible object ..>.dump()` method on nodes. This will return very simple tree representation from the node we are in.
 
