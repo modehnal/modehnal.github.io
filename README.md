@@ -1258,7 +1258,7 @@ In : app.tree()
   So unless there is a blocker, we usually opt to not report issues and work around them.
 
   `Aspirations`:
-  If we introduce automation via accessibility to more people with a coherent project like GNOMEAutomation, that is not collection of projects spliced together to just work, we might have a wider audience and user base. That might help to attract talent to our teams that would help improve Accessibility and keep it in good state.
+  If we introduce automation via accessibility to more people with a coherent project like `GNOMEAutomation`, that is not collection of projects spliced together to just work, we might have a wider audience and user base. That might help to attract talent to our teams that would help improve Accessibility and keep it in good state.
 
   With a project like this we also might have a wider base for `Fedora testing days`. Some things already work on Fedora and are mostly usable. The issue is a long setup as you can see, that this project would hopefully solve. I would imagine that once a test day comes, we could have GitLab/GitHub repositories with our testing suites that I and others would contribute to, so that anyone can just come, download the project and run the tests. This would be quite rich source of data that user would not have to spend a lot of time on. Simply boot VM, run the suits, report results. There is of course a need for real HW testing as well, but that is not the issue we are trying to solve here. Currently, I try to participate in test days, but I am not able to fit it to my schedule every time, which is a shame.
 
