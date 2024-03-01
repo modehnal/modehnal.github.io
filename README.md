@@ -987,50 +987,50 @@ I have started to develop `qecore` only a few years back, so this project is rel
 
 ### The main queries you will be using
 
-  ```python
-  # Most common queries.
-  # Returns <Atspi.Accessible object ..>
-  <Atspi.Accessible object ..>.child(name="..", roleName="..")
-  # Used for finer queries and returns <Atspi.Accessible object ..>
-  <Atspi.Accessible object ..>.findChild(lambda x: x.name == "" and x.size == (0, 5) and x.showing)
-  # Used for finer queries that returns list of results [<Atspi.Accessible object ..>, ..]
-  <Atspi.Accessible object ..>.findChildren(lambda x: x.roleName == "" and x.position[0] >= 0 and x.focused)
+```python
+# Most common queries.
+# Returns <Atspi.Accessible object ..>
+<Atspi.Accessible object ..>.child(name="..", roleName="..")
+# Used for finer queries and returns <Atspi.Accessible object ..>
+<Atspi.Accessible object ..>.findChild(lambda x: x.name == "" and x.size == (0, 5) and x.showing)
+# Used for finer queries that returns list of results [<Atspi.Accessible object ..>, ..]
+<Atspi.Accessible object ..>.findChildren(lambda x: x.roleName == "" and x.position[0] >= 0 and x.focused)
 
-  # All nodes have the base methods defined. Most notably:
-  In : app.child("File").click()
-  Clicking on [menu | File]
-  Mouse button 1 click at (46.0,83.5)
-  # Note the coordinates of the click. The dogtail will calculate a center of the node from its position and size.
+# All nodes have the base methods defined. Most notably:
+In : app.child("File").click()
+Clicking on [menu | File]
+Mouse button 1 click at (46.0,83.5)
+# Note the coordinates of the click. The dogtail will calculate a center of the node from its position and size.
 
-  # Some nodes have actions defined.
-  In : app.child("File").actions
-  Out: {'click': <dogtail.tree.Action at 0x7f97d44b0210>}
-  # Which you can use instead of mouse or keyboard events in some cases.
-  In : app.child("File").doActionNamed("click")
-  click on [menu | File]
-  Out: True
+# Some nodes have actions defined.
+In : app.child("File").actions
+Out: {'click': <dogtail.tree.Action at 0x7f97d44b0210>}
+# Which you can use instead of mouse or keyboard events in some cases.
+In : app.child("File").doActionNamed("click")
+click on [menu | File]
+Out: True
 
-  # When working with text fields the appropriate Atspi nodes have attribute .text
-  <Atspi.Accessible object ..>.text = "Write a text to the text field."
-  # Beware that sometimes you will need to click to the text field or the .text attribute will not update.
+# When working with text fields the appropriate Atspi nodes have attribute .text
+<Atspi.Accessible object ..>.text = "Write a text to the text field."
+# Beware that sometimes you will need to click to the text field or the .text attribute will not update.
 
-  # When working with scroll panes you can use .value attribute to scroll in the page.
-  scroll_pane = <Atspi.Accessible object ..>.child(name="..", roleName="scroll pane")
-  # Look at the value.
-  scroll_pane.value
-  # Look at min and max value.
-  scroll_pane.minValue
-  scroll_pane.maxValue
+# When working with scroll panes you can use .value attribute to scroll in the page.
+scroll_pane = <Atspi.Accessible object ..>.child(name="..", roleName="scroll pane")
+# Look at the value.
+scroll_pane.value
+# Look at min and max value.
+scroll_pane.minValue
+scroll_pane.maxValue
 
-  # Scroll the window - use value between min and max.
-  scroll_pane.value = <int/float>
-  # To simply scroll to the bottom you can use.
-  scroll_pane.value = scroll_pane.maxValue
+# Scroll the window - use value between min and max.
+scroll_pane.value = <int/float>
+# To simply scroll to the bottom you can use.
+scroll_pane.value = scroll_pane.maxValue
 
-  # Beware that this is very dependant on the Accessibility in the application.
-  # It is not uncommon to have the minValue and maxValue to be both 0.0,
-  # in which case you will not be able to scroll this way.
-  ```
+# Beware that this is very dependant on the Accessibility in the application.
+# It is not uncommon to have the minValue and maxValue to be both 0.0,
+# in which case you will not be able to scroll this way.
+```
 
   Now this was quite a lot. Let's say we do not care about a single button, we want to see the entire tree. Again we have multiple options.
 
