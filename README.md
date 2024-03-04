@@ -1185,7 +1185,7 @@ In : app.tree()
   - [Video example: Open Terminal from Overview](https://modehnal.github.io/data/open_terminal_from_overview.webm)
   - [Video example: Click on System menu](https://modehnal.github.io/data/click_on_system_menu.webm)
   - [Video example: Open Activities, start Calculator and do a calculation](https://modehnal.github.io/data/start_calculator_do_a_calculation.webm)
-  - [Video example: Open Terminal open a New Tab, execute a command](https://modehnal.github.io/data/open_terminal_from_overview.webm)
+  - [Video example: Open Terminal open a New Tab, execute a command](https://modehnal.github.io/data/terminal_open_new_tab_execute_command.webm)
   - [Test result: HTML page Full Report Example](https://modehnal.github.io/data/full_report_example.html)
   - [Test result: HTML page backtrace from coredump Example](https://modehnal.github.io/data/backtrace_from_coredump_zenity_example.html)
 
