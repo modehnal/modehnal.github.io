@@ -1182,8 +1182,9 @@ In : app.tree()
 ## Examples
 
   - [Video example: Side by side of session with command line](https://modehnal.github.io/data/gnome_terminal_test_example.webm)
-  - [Video example: Open Terminal from Overview](https://modehnal.github.io/data/open_terminal_from_overview.webm)
   - [Video example: Click on System menu](https://modehnal.github.io/data/click_on_system_menu.webm)
+  - [Video example: Open Terminal from Overview](https://modehnal.github.io/data/open_terminal_from_overview.webm)
+  - [Video example: Scrolling the Terminal](https://modehnal.github.io/data/scrolling_the_terminal.webm)
   - [Video example: Open Activities, start Calculator and do a calculation](https://modehnal.github.io/data/start_calculator_do_a_calculation.webm)
   - [Video example: Open Terminal open a New Tab, execute a command](https://modehnal.github.io/data/terminal_open_new_tab_execute_command.webm)
   - [Test result: HTML page Full Report Example](https://modehnal.github.io/data/full_report_example.html)
