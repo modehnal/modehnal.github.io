@@ -1202,6 +1202,12 @@ In : app.tree()
 
   For me personally these tools are way too different to be compared, but there is no question about difficulty of using `opencv` and comparing two images and working with Python objects. Working with objects will always be more stable.
 
+  There are a few other advantages that need to be mentioned.
+  - It does not matter what theme is in use.
+  - It does not matter what font is in displayed on the screen.
+  - It does not matter where on the screen the application is located.
+  - In GNOME Control Center we can enable Zoom, Large Text or Large Contrast, and it will not affect the automation.
+
 ## Usage with GTK4
 
   While what I have described here will work for GTK4 Applications, you will soon find that there are extra steps required.
