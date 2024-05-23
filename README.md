@@ -1228,6 +1228,8 @@ In : app.tree()
 
   This suite will work on Fedora 39 as is, but you will see some tests failing.
 
+  Update: Automation will now work with no issues on newer Fedoras with qecore==3.25.
+
 ## Reason for this article
 
   There is another reason for this article apart from showcasing our solution.
